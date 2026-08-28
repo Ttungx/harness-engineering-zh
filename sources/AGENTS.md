@@ -6,7 +6,7 @@ The manifest records evidence handling separately from source kind: `linked`,
 `snapshot`, `repository_note`, and `private_review` describe provenance
 boundaries while readable indexes and owning arguments provide thesis routing.
 
-## Adding or refreshing a source
+## 添加或刷新 source
 
 1. Record the canonical URL, title, author or speakers, publisher, date, and
    source kind when those fields apply. Route a source from the readable index
@@ -39,7 +39,7 @@ Cloudflare challenge to non-browser clients. Run
 root to retrieve readable article text; the helper tries the canonical URL
 first, then the verified Internet Archive capture recorded in `sources.json`.
 
-## Boundaries
+## 边界
 
 - A Wayback capture preserves access; it does not grant redistribution rights.
 - CC BY covers only material Ryan has authority to license. Follow `COPYING.md`

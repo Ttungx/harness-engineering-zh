@@ -1,61 +1,44 @@
 # Dependency Ownership
 
-A dependency decision chooses who owns a capability and which risks the
-repository accepts. Count is a weak proxy.
+Dependency 决策选择了谁拥有某项能力以及仓库接受哪些风险。数量是一个弱代理指标。
 
-## Record the capability
+## 记录该能力
 
-For each material dependency or internal replacement, record:
+对于每一个重要的 dependency 或内部替代品，记录：
 
-- the capability required and the compatibility surface it affects;
-- the trust basis for the source or namespace;
-- direct and transitive code, build, and network exposure;
-- pinning, cooldown, vulnerability, provenance, and update policy;
-- the cost of replacing or forking it; and
-- the evidence that will detect a bad update or local regression.
+- 所需的能力及其影响的兼容性表面；
+- 来源或命名空间的信任基础；
+- 直接和传递的代码、构建和网络暴露；
+- 固定版本、冷却期、漏洞、来源和更新策略；
+- 替换或分叉它的成本；以及
+- 将检测到不良更新或本地回归的证据。
 
-Trust can be categorical and explicit. For example, a repository may approve
-`golang.org/x/` as a high-trust namespace while requiring individual review for
-other modules. Policy should preserve those distinct trust categories across
-third-party code.
+信任可以是分类的和明确的。例如，一个仓库可能批准 `golang.org/x/` 作为高信任命名空间，同时要求对其他模块进行单独审查。策略应该在第三方代码中保留这些不同的信任类别。
 
-## Keep specialist dependencies when they reduce total risk
+## 当 specialist dependency 降低总体风险时保留它们
 
-Cryptography, protocol stacks, Unicode, standards-heavy parsers, and other
-evolving specialist domains often benefit from a concentrated upstream
-community. A local rewrite can shrink a graph while increasing compatibility and
-security risk.
+密码学、协议栈、Unicode、标准密集型解析器和其他不断发展的 specialist 领域通常受益于集中的上游社区。本地重写可以缩小依赖图，同时增加兼容性和安全风险。
 
-Prefer a dependency when its capability is materially broader or more dynamic
-than the repository can own well, its provenance and maintenance are credible,
-and focused adapters can keep it behind a narrow seam.
+当某项能力在实质上比仓库能够良好拥有的更广泛或更动态，其来源和维护是可信的，并且聚焦的 adapter 可以将其保持在狭窄的接缝后面时，优先选择 dependency。
 
-## Own narrow behavior deliberately
+## 有意识地拥有狭隘的行为
 
-A first-party implementation can be the lower-risk choice when the needed
-behavior is small, stable, transparent, and central to the repository’s domain.
-Define the supported dialect or contract before replacing the dependency.
+当所需的行为是小的、稳定的、透明的且处于仓库领域核心时，第一方实现可以是较低风险的选择。在替换 dependency 之前，定义支持的方言或契约。
 
-Rebuild confidence with the evidence appropriate to the transferred burden:
+使用与转移后的负担相适应的证据重建信心：
 
-- real-corpus and compatibility fixtures;
-- negative and boundary cases;
-- fuzz or property tests;
-- coverage as a gap detector, not a compatibility claim;
-- provenance and license review;
-- clear package ownership; and
-- an update plan for new inputs or standards.
+- 真实语料库和兼容性 fixture；
+- 负面和边界案例；
+- fuzz 或属性测试；
+- 覆盖率作为差距检测器，而非兼容性声明；
+- 来源和许可审查；
+- 明确的包所有权；以及
+- 针对新输入或标准的更新计划。
 
-An intentional repository-owned Markdown parser is sound when its constrained
-dialect, corpus, failure behavior, and maintenance responsibility are explicit.
+一个有意识的仓库拥有的 Markdown 解析器在其受限的方言、语料库、失败行为和维护责任明确时是合理的。
 
-## Keep versions authoritative
+## 保持版本的权威性
 
-Toolchain and package versions should have one source of truth. Policy code may
-encode rules such as approved major lines, minimum patch age, or trust classes;
-it should not repeat the current pin when it can parse the authoritative
-manifest.
+工具链和包版本应该有一个真实的单一来源。策略代码可以编码规则，如批准的主要版本线、最短补丁年龄或信任类别；它不应该在可以解析权威清单时重复当前的固定版本。
 
-Tests should build versioned manifests from domain values. A routine bump that
-requires editing many constants and hand-built strings is evidence that version
-policy has not been modeled.
+测试应该从领域值构建版本化的清单。需要编辑许多常量和手工构建的字符串的例行升级是版本策略尚未建模的证据。

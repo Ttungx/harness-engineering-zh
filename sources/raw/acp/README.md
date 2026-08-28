@@ -1,7 +1,6 @@
-# Agent Client Protocol source snapshots
+# Agent Client Protocol source 快照
 
-This directory preserves unmodified documentation source from the
-[Agent Client Protocol repository](https://github.com/agentclientprotocol/agent-client-protocol).
+本目录保存了来自 [Agent Client Protocol 仓库](https://github.com/agentclientprotocol/agent-client-protocol) 的未修改文档源文件。
 
 - Pinned revision:
   [`dbbb2b2d7e1eb4153f60788c0c1a4aba1e657764`](https://github.com/agentclientprotocol/agent-client-protocol/commit/dbbb2b2d7e1eb4153f60788c0c1a4aba1e657764)
@@ -20,7 +19,7 @@ This directory preserves unmodified documentation source from the
 source. Its three relative diagram references resolve to the pinned SVG
 snapshots under `../images/`.
 
-## Rights
+## 权利
 
 The upstream repository distributes these files under the Apache License 2.0.
 The adjacent `LICENSE` is the complete upstream license at the pinned

@@ -1,142 +1,73 @@
-# Hold the Worker Constant
+# 保持 Worker 不变
 
-Harness engineering, the practice of improving agent output by shaping the
-environment around it, holds a chosen model and coding agent constant while
-changing context and tools. The constant lasts for one evaluation or deployment
-epoch. A change to the model, coding-agent runtime, or native action interface
-opens a new epoch and requires the environment to be qualified again.
+Harness engineering 是通过塑造 agent 周围环境来改善 agent 输出的实践，它在更改上下文和工具的同时保持选定的模型和编码 agent 不变。这种不变性持续一个评估或部署周期。对模型、编码 agent 运行时或原生操作接口的更改会开启一个新周期，并需要重新验证环境。
 
-The [coding-agent boundary] and [game-engine distinction] define the black box.
-Model and coding-agent engineering produce workers. Harness engineering deploys
-a selected worker into a particular body of work.
+[coding-agent boundary] 和 [game-engine distinction] 定义了黑盒。模型和编码 agent engineering 产出 worker。Harness engineering 将选定的 worker 部署到特定的工作主体中。
 
 [coding-agent boundary]: https://x.com/_lopopolo/status/2051039234346438723
 [game-engine distinction]: https://x.com/_lopopolo/status/2051058498235195856
 
-Within that boundary, context gives the worker intent, local ontology, current
-state, constraints, examples, and definitions of good work. Tools let it search,
-inspect, transform, run, observe, and deliver in the systems where that context
-matters. The environment curates both through repository topology, architecture,
-permissions, tests, logs, graders, and canaries. [Route Context Just in Time]
-and [Make Capabilities Legible and Operable] develop the two levers.
+在该边界内，上下文为 worker 提供意图、本地本体论、当前状态、约束、示例和良好工作的定义。工具使其能够在该上下文重要的系统中搜索、检查、转换、运行、观察和交付。环境通过仓库拓扑、架构、权限、测试、日志、评分器和金丝雀来策划这两者。[Route Context Just in Time] 和 [Make Capabilities Legible and Operable] 详细阐述了这两个杠杆。
 
 [Route Context Just in Time]: ../just-in-time-context/
 [Make Capabilities Legible and Operable]: ../tool-legibility/
 
-## Work in adoption epochs
+## 在采纳周期中工作
 
-Holding the worker constant makes failures actionable. A capable worker that
-cannot complete a job may lack the relevant institutional context, an operable
-capability, a useful feedback loop, sufficient authority, or evidence at the
-outcome boundary. Those are properties of the deployment environment that a team
-can inspect and improve.
+保持 worker 不变使失败变得可操作。一个有能力但无法完成工作的 worker 可能缺少相关的机构上下文、可操作的能力、有用的反馈循环、足够的权限或结果边界处的证据。这些是团队可以检查和改进的部署环境属性。
 
-Record the worker configuration for each epoch: the model, coding-agent host and
-version, native tools, and runtime capabilities such as compaction, background
-processes, and computer use. Qualify it with representative whole-job journeys.
-Repeated runs matter because a fixed worker is still stochastic; the boundary
-identifies the condition being evaluated while repeated trials account for
-stochastic variation.
+记录每个周期的 worker 配置：模型、编码 agent 宿主和版本、原生工具以及运行时能力（如压缩、后台进程和计算机使用）。用代表性的完整工作旅程来验证它。反复运行很重要，因为固定的 worker 仍然是随机的；边界标识正在评估的条件，而反复试验则解释随机变异。
 
-The internal product described in the [OpenAI harness-engineering essay] grew
-from an empty repository to roughly one million lines of code over five months;
-the [Latent Space interview] reports about 1,500 merged pull requests. Codex
-wrote all of its code; people did not contribute code manually. The engineers
-improved the repository, browser, observability, review, and delivery surfaces
-until Codex could launch the application, observe its behavior, respond to
-review, and deliver a verified change. That constraint made missing environment
-capability concrete.
+[OpenAI harness-engineering essay] 中描述的内部产品在五个月内从一个空仓库增长到大约一百万行代码；[Latent Space interview] 报告了约 1,500 个合并的 pull request。Codex 编写了其所有代码；人类没有手动贡献代码。工程师们改进了仓库、浏览器、可观测性、评审和交付界面，直到 Codex 能够启动应用程序、观察其行为、响应评审并交付经过验证的更改。该约束使缺失的环境能力变得具体。
 
 [OpenAI harness-engineering essay]:
   https://openai.com/index/harness-engineering/#:~:text=Throughout%20the%20development%20process%2C%20humans%20never%20directly%20contributed%20any%20code
 [Latent Space interview]:
   https://www.latent.space/p/harness-eng#:~:text=You%20kicked%20off%20as%20a%20team%20of%20three%20people.%20You%E2%80%99re%20putting%20out%20a%20million%20line%20of%20code%2C%20like%201500%20prs
 
-## Requalify every worker upgrade
+## 每次 worker 升级都重新验证
 
-Human priors are part of the adoption state. Earlier workers teach a team how
-small a task should be, how much orchestration it needs, how long an inner loop
-may take, and where a person must hover. Carrying those habits into a new epoch
-can leave a [capability overhang] unused. Assuming every point release improves
-every dimension creates the opposite error.
+人类先验是采纳状态的一部分。早期的 worker 教会团队任务应该多小、需要多少编排、内循环可以持续多久，以及人类必须在哪里监控。将这些习惯带入新周期可能会使 [capability overhang] 未被利用。假设每个点版本都在每个维度上改进会产生相反的错误。
 
 [capability overhang]: https://x.com/_lopopolo/status/2031810853801247190
 
-Re-run complete jobs and [reset those priors regularly]. Adapt prompts, skills,
-documentation, tools, and proof to the new worker's instruction following,
-reasoning, compaction, tool reliability, and failure modes. Ryan Lopopolo
-describes this as [manicuring prompts, skills, and docs] for each release in a
-model family.
+重新运行完整工作并[定期重置这些先验]。将 prompt、skill、文档、工具和证明调整为适应新 worker 的指令遵循、推理、压缩、工具可靠性和故障模式。Ryan Lopopolo 将此描述为针对模型系列中每个版本 [manicuring prompts, skills, and docs]。
 
 [reset those priors regularly]:
   https://x.com/_lopopolo/status/2062192014561603850
 [manicuring prompts, skills, and docs]:
   https://x.com/_lopopolo/status/2055157677496443281
 
-The [AI Native DevCon talk] treats point releases as deployment changes: the
-attainable work can move enough that the surrounding operating environment needs
-to be reconsidered. [GPT-5.2 shipped while Ryan Lopopolo was on winter break].
-When he returned, the team was producing one or two additional pull requests per
-engineer each day without additional harness investment. A later, distinct
-Symphony harness intervention reported a tenfold gain in pull requests per
-engineer per week. The qualification loop determines whether the environment
-should remain stable, adapt, or simplify.
+[AI Native DevCon talk] 将点版本视为部署变更：可完成的工作可能会发生足够大的变化，以至于需要重新考虑周围的运营环境。[GPT-5.2 shipped while Ryan Lopopolo was on winter break]。当他回来时，团队每位工程师每天额外产出一到两个 pull request，而无需额外的 harness 投资。后来，一个不同的 Symphony harness 干预报告了每位工程师每周 pull request 十倍的收益。验证循环决定环境应该保持稳定、适应还是简化。
 
 [AI Native DevCon talk]:
   https://tessl.io/registry/ainativedev/aidevcon-2026-ldn/0.100.8/files/talk-lopopolo-harness-engineering/transcript.md#:~:text=retooling%20your%20stack%20in%20the%20way%20you%20work%20with%20every%20point%20release
 [GPT-5.2 shipped while Ryan Lopopolo was on winter break]:
   https://www.aakashg.com/how-pms-ship-100k-lines-of-code/#:~:text=when%20I%20came%20back%20without%20any%20additional%20investment
 
-Recalibrate ambition in the same cycle. Probe progressively larger outcomes
-until proof begins to fail. One [proposed high-ambition prompt] asks a worker to
-search the open-source ecosystem for changes that would improve `libghostty`.
-The proposal probes whether the worker can discover and close over
-cross-repository work. In a separate operator observation, Ryan reports that
-GPT-5.3 was [less willing than GPT-5.2 to attempt difficult work]. The
-evaluation should discover the new outcome boundary instead of preserving an old
-one by habit.
+在同一周期中重新校准雄心。逐步探测更大的结果，直到证明开始失败。一个 [proposed high-ambition prompt] 要求 worker 搜索开源生态系统中可以改进 `libghostty` 的更改。该提案探测 worker 是否能够发现并完成跨仓库工作。在另一个操作者观察中，Ryan 报告 GPT-5.3 [less willing than GPT-5.2 to attempt difficult work]。评估应该发现新的结果边界，而不是通过习惯保留旧的边界。
 
 [proposed high-ambition prompt]:
   https://x.com/_lopopolo/status/2075861840085848202
 [less willing than GPT-5.2 to attempt difficult work]:
   https://x.com/_lopopolo/status/2030441273900097933
 
-## Treat inner-loop latency as part of qualification
+## 将内循环延迟视为验证的一部分
 
-A worker reasons from the feedback it can obtain before its trajectory loses
-focus or patience. Build, test, browser, and observability latency therefore
-shape usable capability. The GPT-5.2 Codex harness lacked background shells, so
-the worker would wait for blocking build scripts. GPT-5.3 added background
-shells and was less willing to block on the same loop. Over one week, the team
-moved the repository from a bespoke Makefile through Bazel, Turbo, and Nx. They
-stopped when a complete build finished in under one minute. The team adopted the
-[sub-minute build loop] as a round upper bound. A breach told them to stop the
-current work and decompose the build graph until the loop fit the bound again.
+Worker 从其在轨迹失去焦点或耐心之前能获得的反馈中进行推理。因此，构建、测试、浏览器和可观测性延迟塑造了可用能力。GPT-5.2 Codex harness 缺少后台 shell，因此 worker 会等待阻塞性构建脚本。GPT-5.3 添加了后台 shell，且不太愿意在同一循环中阻塞。在一周内，团队将仓库从定制 Makefile 迁移到 Bazel、Turbo 和 Nx。当完整构建在一分钟内完成时，他们停了下来。团队采用 [sub-minute build loop] 作为回合上限。突破上限意味着停止当前工作并分解构建图，直到循环再次符合上限。
 
 [sub-minute build loop]:
   https://www.latent.space/p/harness-eng#:~:text=retool%20the%20entire%20build%20system%20to%20complete%20in%20under%20a%20minute
 
-Retest that threshold for every epoch. Fast focused checks support exploration;
-broader proof can run later without blocking the worker's next useful action.
-Measure accepted outcomes as well as speed so a shorter loop does not merely
-produce incorrect work faster.
+为每个周期重新测试该阈值。快速聚焦的检查支持探索；更广泛的证明可以稍后运行，而不会阻塞 worker 的下一个有用操作。同时衡量接受的结果和速度，这样更短的循环不会仅仅更快地产出不正确的工作。
 
-## Retire scaffolding the worker has absorbed
+## 退役 worker 已吸收的脚手架
 
-Prefer interventions that remain visible through the worker's native loop:
-architecture, types, tests, tool contracts, observable state, and acceptance
-criteria. Bespoke mediation can be valuable during one epoch and obsolete in the
-next. In the [native computer-use example], native computer use let the team
-discard a virtual display and video-capture stack while preserving end-to-end
-application validation.
+优先选择通过 worker 原生循环保持可见的干预：架构、类型、测试、工具契约、可观测状态和验收标准。定制的中介在一个周期内可能有价值，但在下一个周期内可能过时。在 [native computer-use example] 中，原生计算机使用使团队能够丢弃虚拟显示和视频捕获堆栈，同时保留端到端的应用验证。
 
 [native computer-use example]:
   https://www.aakashg.com/how-pms-ship-100k-lines-of-code/#:~:text=get%20to%20throw%20away%20all%20that%20bespoke%20code
 
-Requalification includes subtraction. Remove scaffolding that no longer improves
-complete journeys, keep durable constraints that still express the job, and let
-newly native capabilities simplify the environment. A coding agent's action
-language is part of the worker configuration; [Model-Native Semantics Across
-Agent Hosts] develops the migration surface between adoption epochs.
+重新验证包括减法。移除不再改进完整旅程的脚手架，保留仍然表达工作的持久约束，并让新原生能力简化环境。编码 agent 的操作语言是 worker 配置的一部分；[Model-Native Semantics Across Agent Hosts] 详细阐述了采纳周期之间的迁移界面。
 
 [Model-Native Semantics Across Agent Hosts]: model-native-semantics.md

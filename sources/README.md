@@ -23,9 +23,9 @@ The public-post capture is not an exhaustive account export. An official X
 export can extend it with posts missed by public discovery or deleted without an
 independent capture.
 
-## Ryan Lopopolo’s writing
+## Ryan Lopopolo 的文章
 
-| Date       | Work                                                                                                                                                                                     | Contribution                                                                                                  |
+| 日期       | 作品                                                                                                                                                                                     | 贡献                                                                                                  |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | 2023-06-13 | [I Wrote 4,000 Lines of Code with ChatGPT in a Weekend](https://hyperbo.la/w/chatgpt-4000/) · [local text](raw/hyperbola/chatgpt-4000.mdx)                                               | Regular modules improved first-pass generation and anticipated agents grounded in local code and history.     |
 | 2025-08-10 | [MCP Solves Tool Discovery for LLMs](https://hyperbo.la/w/tool-discovery/) · [local text](raw/hyperbola/tool-discovery.mdx)                                                              | Capabilities must be discoverable and legible to the model.                                                   |
@@ -47,9 +47,9 @@ canonical OpenAI essay can use the [`uv` fetch helper].
 
 [`uv` fetch helper]: scripts/fetch_openai.py
 
-## Talks and interviews
+## 演讲与访谈
 
-| Date       | Work                                                                                                                                                                                                              | Preserved access                                               |
+| 日期       | 作品                                                                                                                                                                                                              | 保留的访问方式                                               |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | 2026-03-03 | [Code Is Free: Securing Software in the Agentic Future] · [official transcript] · [slides]                                                                                                                        | [Wayback conference page] · [Wayback video page]               |
 | 2026-03-10 | [Build Hour: API & Codex](https://www.youtube.com/watch?v=rhsSqr0jdFw) · [Rewiz transcript]                                                                                                                       | [Wayback OpenAI Build Hour video page]                         |
@@ -59,7 +59,7 @@ canonical OpenAI essay can use the [`uv` fetch helper].
 | 2026-05-25 | [How PMs Ship 100K Lines of Code](https://www.aakashg.com/how-pms-ship-100k-lines-of-code/) · [video](https://www.youtube.com/watch?v=8suwvrF0Lv0)                                                                | [Wayback Aakash interview] · [Wayback Aakash video page]       |
 | 2026-06-01 | [Harness Engineering at AI Native DevCon](https://tessl.io/registry/ainativedev/aidevcon-2026-ldn/0.100.8/files/talk-lopopolo-harness-engineering/transcript.md)                                                  | [Wayback AI Native DevCon transcript]                          |
 | 2026-06-04 | [Harness Engineering at Craft Conference](https://craft-conf.com/2026/talk/ryan-lopopolos-talk)                                                                                                                   | [Wayback Craft talk page]                                      |
-| 2026-06-09 | [OpenAI’s Framework for Shipping Code at 70 PRs/Week](https://tessl.io/podcast/109/) · [video](https://www.youtube.com/watch?v=MFQIKbr1IEo)                                                                       | [Wayback Tessl interview] · [Wayback AI Native Dev video page] |
+| 2026-06-09 | [OpenAI's Framework for Shipping Code at 70 PRs/Week](https://tessl.io/podcast/109/) · [video](https://www.youtube.com/watch?v=MFQIKbr1IEo)                                                                       | [Wayback Tessl interview] · [Wayback AI Native Dev video page] |
 
 [Wayback OpenAI Build Hour video page]:
   https://web.archive.org/web/20260310195018id_/https://www.youtube.com/watch?v=rhsSqr0jdFw
@@ -97,45 +97,42 @@ canonical OpenAI essay can use the [`uv` fetch helper].
 
 The video-page captures preserve the watch page, title or video identifier, and
 metadata. They are not treated as archived copies of the audiovisual streams.
-Vimeo’s robots policy prevented preservation of the ODSC video page. The Rewiz
+Vimeo's robots policy prevented preservation of the ODSC video page. The Rewiz
 transcript page returned an upstream TLS error during preservation. Their
 canonical links and archive status remain in [`sources.json`](sources.json).
 
-## Public posts
+## 公开帖子
 
 The [Twitter source index] groups captured posts into twelve recurring working
 principles and keeps the direct evidence beside each claim.
 
 [Twitter source index]: twitter/
 
-## Influences and alternate framings
+## 影响与替代框架
 
 - [matklad: `ARCHITECTURE.md`](https://matklad.github.io/2021/02/06/ARCHITECTURE.md.html)
 - [artichoke/artichoke: `ARCHITECTURE.md`](https://github.com/artichoke/artichoke/blob/trunk/ARCHITECTURE.md)
 - [artichoke/artichoke@fbb43b6](https://github.com/artichoke/artichoke/commit/fbb43b6ce18556412a489a88e5cc24dea9b587a8)
 - [artichoke/artichoke@1dd8978](https://github.com/artichoke/artichoke/commit/1dd8978fe4edf1971928fd00e30edbd124fd0aaa)
 - [artichoke/artichoke@fa5b2eb](https://github.com/artichoke/artichoke/commit/fa5b2eb907d8746efd7cf51f07cd84e7e1f9b49f)
-- [Alexis King: “Parse, don’t validate”](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
+- [Alexis King: "Parse, don't validate"](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
 - [Martin Fowler: Strangler Fig](https://martinfowler.com/bliki/StranglerFigApplication.html)
-- [George Zhang: “Harness Engineering Is Cybernetics”](https://x.com/i/article/2030414577213820928)
+- [George Zhang: "Harness Engineering Is Cybernetics"](https://x.com/i/article/2030414577213820928)
 - [Birgitta Böckeler: initial harness-engineering memo](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering-memo.html)
-- [Birgitta Böckeler: “Harness engineering for coding agent users”](https://martinfowler.com/articles/harness-engineering.html)
+- [Birgitta Böckeler: "Harness engineering for coding agent users"](https://martinfowler.com/articles/harness-engineering.html)
 
 [Influences and Alternate Framings](../docs/lineage/) develops these
 relationships and their chronology.
 
-## Related research
+## 相关研究
 
-OpenAI's [confessions publication] and [research paper] study a separately
-rewarded model self-report under deliberately induced failures. The work
-sharpens the evidentiary limits of MLD: ordinary agent reflection remains
-low-trust telemetry until traces, tests, review, and outcomes corroborate it.
+OpenAI的 [confessions publication] 和 [research paper] 研究了一个在人为诱导失败条件下被单独奖励的模型的自我报告。这项工作深化了 MLD 的证据边界：普通的 agent 反思仍然是低可信度的遥测，除非 trace、测试、review 和结果能够相互印证。
 
 [confessions publication]:
   https://openai.com/index/how-confessions-can-keep-language-models-honest/
 [research paper]: https://arxiv.org/abs/2512.08093
 
-## Agent interoperability
+## Agent 互操作性
 
 - [Polytoken introduction](https://docs.polytoken.dev/introduction/)
 - [Polytoken tool reference](https://docs.polytoken.dev/reference/tools/)
@@ -148,7 +145,7 @@ low-trust telemetry until traces, tests, review, and outcomes corroborate it.
 - [Agent Client Protocol tool calls](https://agentclientprotocol.com/protocol/v1/tool-calls)
 - [Agent Client Protocol extensibility](https://agentclientprotocol.com/protocol/v1/extensibility)
 
-## Projects and cases
+## 项目与案例
 
 - [Future Regret in Artichoke's State Refactor](../evals/artichoke-state-modeling.md):
   [failed prototype #442](https://github.com/artichoke/artichoke/pull/442),
@@ -182,9 +179,9 @@ low-trust telemetry until traces, tests, review, and outcomes corroborate it.
 - [openai/symphony](https://github.com/openai/symphony) and
   [An open-source spec for Codex orchestration: Symphony](https://openai.com/index/open-source-codex-orchestration-symphony/)
 
-## Source snapshots
+## 源文件快照
 
-- [Ryan’s hyperbo.la articles](raw/hyperbola/)
+- [Ryan's hyperbo.la articles](raw/hyperbola/)
 - [Agent Client Protocol documentation](raw/acp/)
 
 See [`COPYING.md`](../COPYING.md) for license scope and attribution.

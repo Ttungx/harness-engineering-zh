@@ -1,10 +1,8 @@
-# Python Source Tooling
+# Python Source 工具
 
-These scripts parse and validate the source manifest and Twitter corpus and
-retrieve the OpenAI harness-engineering essay. Keep them small, typed, and
-independently runnable with `uv`.
+这些脚本解析和验证 source manifest 和 Twitter corpus，并获取 OpenAI harness-engineering 文章。保持它们的小巧、类型化，并可通过 `uv` 独立运行。
 
-## Model the domain before writing the workflow
+## 在编写工作流之前先建模领域
 
 - Parse JSON and other unknown input at the boundary. Business logic receives
   domain objects, never partially checked mappings.
@@ -26,7 +24,7 @@ independently runnable with `uv`.
 - Build structured output from models and serializers. Repeated string joining
   and interpolation of structured records indicates a missing domain model.
 
-## Keep units intact to the boundary
+## 保持单位完整到边界
 
 - Represent durations as `datetime.timedelta`. Convert with `total_seconds()`
   only when calling an API that requires a numeric value.
@@ -37,7 +35,7 @@ independently runnable with `uv`.
 - Retry only failures that can plausibly succeed unchanged. Keep retry budgets
   bounded and honor an actionable `Retry-After` response.
 
-## Preserve the script boundary
+## 保持脚本边界
 
 - Keep executable workflows as PEP 723 scripts with `uv` shebangs.
 - Prefer the standard library. When a script needs an outside package, declare
@@ -46,13 +44,13 @@ independently runnable with `uv`.
   executable modules as thin orchestration layers.
 - Do not edit immutable source snapshots while changing tooling.
 
-## Tests and proof
+## 测试与验证
 
 Keep parser and model tests hermetic. Cover successful construction, missing and
 unknown fields, tagged-variant boundaries, cross-record relationships, overflow
 and path safety, and failures that previously escaped the model.
 
-Run the focused proof loop from the repository root:
+从仓库根目录运行聚焦的验证循环：
 
 ```sh
 uvx ty check sources/scripts

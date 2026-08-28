@@ -1,99 +1,49 @@
-# Deploy Into the Private Process-Data Iceberg
+# 部署到私有流程-数据冰山
 
-General model weights contain the visible tip of an organization’s knowledge.
-The work itself depends on a much larger submerged body of private, changing
-process data: current records, local ontology, operating history, workflow
-exceptions, tacit quality bars, and authority relationships. [The model does not
-have your data], and organizations cannot presume that this material will be
-present in general model weights or that an agent will reliably intuit which
-parts govern a particular job. Last-mile deployment makes the relevant
-relationships and capabilities available to a selected model-and-coding-agent
-configuration held constant for the deployment.
+通用模型权重包含了组织知识的可见冰山一角。工作本身依赖于更大的、潜藏在水下的私有、变化的流程数据：当前记录、本地本体论、运营历史、工作流异常、隐含的质量标准和权限关系。[The model does not have your data]，组织不能假设这些材料会存在于通用模型权重中，也不能假设 agent 会可靠地推断出哪些部分管辖特定的工作。最后一英里部署使相关的关系和能力可供为部署保持不变的选定模型-编码 agent 配置使用。
 
 [the model does not have your data]:
   https://x.com/_lopopolo/status/2051086282236068178
 
-The resulting worker can perform a situated job. It knows which definition of
-revenue the company uses, which customer is in a pilot, how an investigation is
-normally run, what level of polish the team accepts, and which person can
-authorize the next step.
+由此产生的 worker 可以执行一项有位置感的工作。它知道公司使用的收入定义是哪个、哪个客户处于试点中、调查通常如何进行、团队接受什么水平的打磨，以及哪个人可以授权下一步。
 
-## Discover the deployment surface
+## 发现部署表面
 
-[Please Go Brr, on Token Mandates] treats broad token budgets as an
-organizational search strategy. Leadership rarely knows in advance which
-practitioners can shape an effective harness, which business problems can absorb
-reasoning compute, or which combinations of context, tools, and access will
-work. Distributed experimentation lets the organization’s existing experts
-discover those patterns close to the work.
+[Please Go Brr, on Token Mandates] 将广泛的 token 预算视为一种组织搜索策略。领导层很少事先知道哪些从业者可以塑造有效的 harness、哪些业务问题可以吸收推理计算，或者哪些 context、工具和访问的组合会奏效。分布式实验让组织现有的专家在工作附近发现这些模式。
 
 [Please Go Brr, on Token Mandates]:
   https://hyperbo.la/w/token-mandates/#:~:text=organizational%20discovery%20mechanism%20for%20learning%20how%20to%20deploy%20reasoning%20compute
 
-A useful experiment identifies a situated job, the people who understand it, the
-missing context, tools, or access, and evidence about the outcome. Those
-discoveries can become shared context, paved environments, and bounded tools.
-[Outcome-bound effectiveness] determines which patterns deserve lasting
-investment.
+一个有用的实验识别出一项有位置感的工作、理解它的人、缺失的 context、工具或访问权限，以及关于结果的证据。这些发现可以成为共享 context、铺设好的环境和有界工具。[Outcome-bound effectiveness] 决定哪些模式值得持续投资。
 
 [Outcome-bound effectiveness]: ../effectiveness/
 
-## Model the work around the records
+## 围绕记录建模工作
 
-A useful organizational context store preserves the concepts that give records
-meaning. Its data ontology names entities, metrics, identifiers, and their
-relationships. Its work ontology names outcomes, workflows, actors, tools,
-exceptions, evidence, and authority. Those models give current operational state
-interpretable relationships.
+一个有用的组织 context 存储保留赋予记录意义的概念。它的数据本体论命名实体、指标、标识符及其关系。它的工作本体论命名结果、工作流、参与者、工具、异常、证据和权限。这些模型为当前运营状态提供可解释的关系。
 
-The [business-ontology example] makes this concrete through an internal data
-agent. Warehouse access alone cannot resolve competing definitions of revenue or
-an active user. The agent also needs the company’s product lines, customer
-segments, teams, pilot customers, current plan, and shared metric definitions.
-Those relationships let it reason about how the business operates and produce an
-answer that belongs to this organization.
+[business-ontology example] 通过一个内部数据 agent 使这变得具体。仅靠仓库访问无法解决收入的矛盾定义或活跃用户。agent 还需要公司的产品线、客户细分、团队、试点客户、当前计划和共享指标定义。这些关系让它能够推理业务如何运作，并产生属于该组织的答案。
 
 [business-ontology example]:
   https://www.latent.space/p/harness-eng#:~:text=You%20have%20to%20understand%20what%20revenue%20is%2C%20what%20your%20customer%20segments%20are
 
-[How PMs Ship 100K Lines of Code] describes a product form for accumulating that
-semantic layer. A reusable context library interviews the user about the data
-ontology and business metrics, learns from completed tasks, and makes the
-resulting durable knowledge available to later runs. Domain experts can teach
-the deployed worker through the work itself.
+[How PMs Ship 100K Lines of Code] 描述了积累该语义层的产品形式。一个可重用的 context 库就数据本体论和业务指标采访用户，从已完成的任务中学习，并使产生的持久知识可供后续运行使用。领域专家可以通过工作本身来培训部署的 worker。
 
 [How PMs Ship 100K Lines of Code]:
   https://www.aakashg.com/how-pms-ship-100k-lines-of-code/#:~:text=both%20interview%20the%20user%20and%20learn%20from%20all%20the%20tasks
 
-Organization-specific nonfunctional requirements belong in the same model of
-work. [What Does It Mean to Do a Good Job?] names the tone, taste, risk
-tolerance, acceptable shortcuts, and degree of polish that teams usually
-transmit through hiring and repeated exposure. These choices change with the
-organization, product, and risk posture, making them part of the private process
-data required for situated work. Their explicit form turns a general model's
-many plausible expert styles into one current local standard.
+组织特定的非功能性需求属于同一个工作模型。[What Does It Mean to Do a Good Job?] 命名了团队通常通过招聘和反复接触传递的基调、品味、风险容忍度、可接受的捷径和打磨程度。这些选择随组织、产品和风险态势而变化，使其成为有位置感的工作所需的私有流程数据的一部分。它们的显式形式将通用模型的许多看似合理的专家风格转变为一个当前的本地标准。
 
 [What Does It Mean to Do a Good Job?]:
   https://hyperbo.la/w/what-does-it-mean-to-do-a-good-job/#:~:text=tone%2C%20taste%2C%20risk%20tolerance%2C%20how%20much%20polish%20is%20enough%2C%20what%20shortcuts%20are%20acceptable
 
-## Keep each kind of truth with its owner
+## 让每种真相与其所有者在一起
 
-Current records belong in systems that already own their permissions, history,
-and update path: warehouses, issue trackers, document systems, logs, source
-repositories, customer systems, and operational databases. Search and connectors
-can retrieve an authorized slice without creating a second stale copy.
+当前记录属于已经拥有其权限、历史和更新路径的系统：数据仓库、问题跟踪器、文档系统、日志、源代码仓库、客户系统和运营数据库。搜索和连接器可以在不创建第二个过时副本的情况下检索授权的切片。
 
-Organization-wide context may need a separate managed corpus. Its owner
-maintains rights, retention, freshness, and access while target repositories
-retain the architecture, schemas, decisions, and guardrails required to change
-and verify their own systems.
+组织范围的 context 可能需要一个单独的托管语料库。其所有者维护权利、保留、新鲜度和访问权限，而目标仓库保留更改和验证其自身系统所需的架构、schema、决策和防护栏。
 
-The target repository owns the knowledge required to change and verify that
-target: architecture, schemas, critical journeys, local decisions, guardrails,
-and routes to authoritative sources. When a broader context store exists, its
-owner maintains the corpus’s rights, retention, freshness, and access model. The
-active trajectory receives the smallest relevant projection across these
-sources.
+目标仓库拥有更改和验证该目标所需的知识：架构、schema、关键旅程、本地决策、防护栏和通往权威来源的路由。当存在更广泛的 context 存储时，其所有者维护语料库的权利、保留、新鲜度和访问模型。活跃轨迹接收跨这些来源的最小相关投影。
 
 ```mermaid
 flowchart LR
@@ -104,75 +54,34 @@ flowchart LR
   trajectory --> outcome["Observed outcome"]
 ```
 
-This boundary keeps a product repository focused and reviewable. A whole-corpus
-snapshot needs an explicit owner for provenance, permissions, currency,
-retention, and deletion. Actual mutations write through the system that owns the
-affected state; reviewed stable lessons return to the owner responsible for
-their future use. [Route Context Just in Time] develops how an agent crosses
-these layers without loading all of them into its working set.
+这个边界使产品仓库保持专注且可审查。整个语料库的快照需要一个明确的所有者来负责来源、权限、时效、保留和删除。实际的更改通过拥有受影响状态的系统写入；经过审查的稳定教训返回负责其未来使用的所有者。[Route Context Just in Time] 阐述了 agent 如何在不将所有层都加载到其工作集的情况下跨越这些层。
 
 [Route Context Just in Time]: ../just-in-time-context/
 
-## Pair each goal with a context curator
+## 将每个目标与一个 context 策展人配对
 
-In [Basis’s context repositories in OpenAI Build Hour], Mitch Troyanovsky
-describes `Arnold`, the production monorepo, and `Atlas`, a second Git
-repository for company context outside the production tree. Codex can combine
-personal notes, company operating knowledge, and production code while those
-bodies of information retain separate update paths.
+在 [Basis's context repositories in OpenAI Build Hour] 中，Mitch Troyanovsky 描述了 `Arnold`（生产 monorepo）和 `Atlas`（生产树之外的公司 context 的第二个 Git 仓库）。Codex 可以组合个人笔记、公司运营知识和生产代码，而这些信息体保留独立的更新路径。
 
-[Basis’s context repositories in OpenAI Build Hour]:
+[Basis's context repositories in OpenAI Build Hour]:
   https://rewiz.app/channels/%40openai/build-hour-api-codex#:~:text=we%20have%20two%20repos%20in%20our%20company
 
-Use the goal as the deployment unit. Its sponsor—the person or team accountable
-for the outcome—defines the goal version, outcome measure, requested systems and
-scope, and conditions that trigger revision. The goal directs a parent worker: a
-chosen model-and-coding-agent pair operating in its harness. Ryan Lopopolo
-writes that [`/goal` is for processes and outcomes]: one goal can drive many
-work units and produce many pull requests or artifacts. A context-curator
-sidecar maintains the organizational context selected for that continuing
-purpose.
+将目标作为部署单元。其发起人——对结果负责的个人或团队——定义目标版本、结果度量、请求的系统和范围，以及触发修订的条件。目标指导一个父 worker：一个在其 harness 中运行的选定模型-编码 agent 对。Ryan Lopopolo 写道，[`/goal` is for processes and outcomes]：一个目标可以驱动多个工作单元，并产生多个 pull request 或工件。context 策展人 sidecar 维护为该持续目的选择的组织 context。
 
 [`/goal` is for processes and outcomes]:
   https://x.com/_lopopolo/status/2051758630312280085
 
-The sidecar can record changing work, current phase, and context gaps under the
-goal. The sponsor owns changes to the goal itself. Each material goal revision
-creates a new version and triggers requalification of the context projection,
-permissions, and outcome measure.
+sidecar 可以在目标下记录变化的工作、当前阶段和 context 缺口。发起人拥有目标本身的更改。每个重要的目标修订都会创建一个新版本，并触发 context 投影、权限和结果度量的重新验证。
 
-The goal-specific repository is a derived projection. It holds routes,
-goal-scoped synthesis, decisions, examples, provenance, and bounded snapshots.
-Volatile records remain in live systems. Submit target rules to the target
-repository’s owner and reusable organization-wide knowledge to the shared corpus
-owner. Context that exists only for the goal expires with it.
+目标特定的仓库是一个派生的投影。它持有路由、目标范围的综合、决策、示例、来源和有界快照。易变的记录保留在实时系统中。将目标规则提交给目标仓库的所有者，将可重用的组织范围知识提交给共享语料库的所有者。仅为目标存在的 context 随目标到期而过期。
 
-The parent, curator, and publisher use distinct identities and receive separate
-grants. Publication requires source-owner permission to persist, compatibility
-with the destination repository’s readers, classification, storage, and
-retention policy, and permission for the intended parent to read the result. A
-curator’s broader source access cannot widen the parent’s scope. Snapshot
-material only when these conditions align; retain a live route for everything
-else. Secrets and credential material stay out of the repository. Git authorship
-metadata records change history without establishing identity or authority.
+父 worker、策展人和发布者使用不同的身份并接收单独的授权。发布需要来源所有者的持久化权限、与目标仓库读者的兼容性、分类、存储和保留策略，以及供指定父 worker 读取结果的权限。策展人更广泛的来源访问不能扩大父 worker 的范围。仅在这些条件对齐时才快照材料；为其他所有内容保留实时路由。密钥和凭据材料不进入仓库。Git 作者元数据记录更改历史而不建立身份或权限。
 
-A Git repository of Markdown and small structured files is sufficient for this
-durable, text-shaped projection. Coding agents already know how to search, read,
-compare, and patch it. The implementation can be [“just Codex and a Git repo
-full of Markdown”]. Repository hosting adds review and access control, while
-explicit citations preserve source provenance.
+一个包含 Markdown 和小型结构化文件的 Git 仓库就足以实现这个持久的、文本形状的投影。编码 agent 已经知道如何搜索、读取、比较和修补它。实现可以是 ["just Codex and a Git repo full of Markdown"]。仓库托管添加了审查和访问控制，而显式的引用保留了来源来源。
 
-[“just Codex and a Git repo full of Markdown”]:
+["just Codex and a Git repo full of Markdown"]:
   https://x.com/_lopopolo/status/2063119284084023805
 
-Bootstrap records the sponsor, goal version, worker identities, qualified parent
-and sidecar configurations, authoritative systems, destination audience and
-retention, and initial source routes. When the goal ends, stop the scheduled
-work and revoke the sidecar’s credentials. Source owners and applicable policy
-determine whether goal-only context is archived or destroyed. A deletion commit
-does not erase Git history. Assured deletion also addresses repository history
-and controlled caches, clones, and downstream copies. Material with strict
-deletion obligations remains a live reference outside the projection.
+Bootstrap 记录了发起人、目标版本、worker 身份、经过验证的父 worker 和 sidecar 配置、权威系统、目标受众和保留策略，以及初始源路由。当目标结束时，停止计划的工作并撤销 sidecar 的凭据。来源所有者和适用策略决定仅限目标的 context 是被归档还是被销毁。删除提交不会擦除 Git 历史。有保证的删除还涉及仓库历史和受控的缓存、克隆和下游副本。具有严格删除义务的材料在投影之外保持为实时引用。
 
 ```mermaid
 flowchart LR
@@ -193,125 +102,72 @@ flowchart LR
   repo --> parent
 ```
 
-[Route Context Just in Time] owns the curation, publication, serving, and
-evaluation loop for this projection.
+[Route Context Just in Time] 负责该投影的策展、发布、服务和评估循环。
 
-## Promote stable decisions to their owner
+## 将稳定决策提升到其所有者
 
-Some operational conversations produce decisions that should outlive the thread.
-A decision belongs in the layer whose future work it governs. In the
-[cryptography example in OpenAI Build Hour], an internal OpenAI product team had
-worked with security to choose an approved cryptography implementation. The
-decision remained in Slack, so a new engineer working with Codex added a
-different npm cryptography dependency. The team recovered the decision and
-encoded a repository guardrail requiring the approved implementation and
-forbidding alternate npm cryptography packages, then reran the change. Encoding
-the scoped rule in the repository makes it available to future changes while
-Slack retains the decision history.
+一些运营对话产生应该比对话线程更持久的决策。决策属于其管辖未来工作的层。在 [cryptography example in OpenAI Build Hour] 中，一个内部 OpenAI 产品团队与安全合作选择了一个批准的加密实现。该决策留在 Slack 中，因此一个使用 Codex 的新工程师添加了一个不同的 npm 加密依赖项。团队恢复了该决策，并编码了一个仓库防护栏，要求使用批准的实现并禁止替代的 npm 加密包，然后重新运行了更改。将范围规则编码在仓库中使其可供未来的更改使用，而 Slack 保留了决策历史。
 
 [cryptography example in OpenAI Build Hour]:
   https://rewiz.app/channels/%40openai/build-hour-api-codex#:~:text=I%20partnered%20with%20our%20security%20engineering%20team%20to%20upgrade%20our%20app%20to%20the%20blessed%20cryptography%20library
 
-Promotion requires judgment. Record the decision’s scope, owner, effective date
-or superseding condition, and enforcement surface. Preserve a link to the
-originating evidence when it helps explain the choice. Leave volatile facts in
-their authoritative system and retrieve them when the task requires them.
+提升需要判断。记录决策的范围、所有者、生效日期或替代条件，以及执行表面。当它有助于解释选择时，保留指向原始证据的链接。将易变的事实留在其权威系统中，并在任务需要时检索它们。
 
-[Turn Feedback Into Infrastructure] develops how repeated corrections and failed
-trajectories become durable controls.
+[Turn Feedback Into Infrastructure] 阐述了反复的更正和失败的轨迹如何成为持久的控制。
 
 [Turn Feedback Into Infrastructure]: ../feedback/
 
-## Expose context and capability together
+## 同时暴露 context 和能力
 
-Harness engineering presents private process data through two coupled surfaces:
+harness engineering 通过两个耦合的表面呈现私有流程数据：
 
-- retrievable context that explains the domain, current state, intent, and
-  constraints; and
-- bounded tools that let the worker inspect and act where the process lives.
+- 可检索的 context，解释领域、当前状态、意图和约束；以及
+- 有界工具，让 worker 在流程所在的地方进行检查和操作。
 
-Ryan’s axiom [code is how an agent uses a computer] names the worker’s internal
-action language. A coding agent can search files, query systems, transform
-formats, call APIs, inspect interfaces, produce artifacts, and verify results.
-The code can remain inside the worker’s execution path while the user receives a
-domain outcome.
+Ryan 的公理 [code is how an agent uses a computer] 命名了 worker 的内部操作语言。编码 agent 可以搜索文件、查询系统、转换格式、调用 API、检查接口、产生工件和验证结果。代码可以留在 worker 的执行路径内，而用户获得领域结果。
 
 [code is how an agent uses a computer]:
   https://x.com/_lopopolo/status/2043495733375230026
 
-This changes how scarce expertise is distributed. A data team traditionally
-encodes its leverage into golden tables and dashboards that anticipate common
-questions. An agent with the team’s data ontology and business context can
-[deliver the bespoke service directly], producing the answer or artifact the
-current user needs. The same move applies to investigations, support workflows,
-financial analysis, research, administration, and other expert work.
+这改变了稀缺专业知识的分配方式。数据团队传统上将其杠杆编码到预期常见问题的黄金表和仪表板中。一个拥有团队数据本体论和业务 context 的 agent 可以 [deliver the bespoke service directly]，产生当前用户需要的答案或工件。同样的做法适用于调查、支持工作流、财务分析、研究、行政管理和其他专家工作。
 
 [deliver the bespoke service directly]:
   https://x.com/_lopopolo/status/2049939343901606332
 
-## Give domain experts a paved lane
+## 为领域专家提供铺设好的车道
 
-Domain experts already know the hard part of their work. [Coding Agents for
-Technical Non-Engineers] shows how a managed environment lets them encode it:
-standardize a language and package workflow, make the runtime compatible with
-endpoint security, distribute agent guidance through enterprise configuration,
-and provide a small approved toolkit for common transformations. Scientists,
-analysts, operators, support staff, and security researchers can turn an
-investigation or repeated task into a reviewable, repeatable artifact.
+领域专家已经知道他们工作的困难部分。[Coding Agents for Technical Non-Engineers] 展示了托管环境如何让他们编码：标准化语言和打包工作流、使运行时与端点安全兼容、通过企业配置分发 agent 指导，以及提供小型批准的常见转换工具包。科学家、分析师、运营人员、支持人员和安全研究员可以将调查或重复性任务转化为可审查、可重复的工件。
 
 [Coding Agents for Technical Non-Engineers]:
   https://hyperbo.la/w/coding-agents-for-technical-non-engineers/#:~:text=Domain%20experts%20already%20have%20the%20hard%20part
 
-The paved lane also gives the worker a bounded route back to the expert. In
-[Code Is Free], a worker identifies the person responsible for a security
-assumption, explains why the assumption may no longer hold, and asks the exact
-question the repository cannot answer. The expert retains decision authority;
-the harness preserves the answer's provenance and scope. [Accrue Domain
-Expertise Through the Work] develops how reviewed answers become durable context
-and executable guardrails.
+铺设好的车道还为 worker 提供了回到专家的有界路由。在 [Code Is Free] 中，worker 识别负责安全假设的人，解释为什么该假设可能不再成立，并提出仓库无法回答的确切问题。专家保留决策权限；harness 保留答案的来源和范围。[Accrue Domain Expertise Through the Work] 阐述了经过审查的答案如何成为持久的 context 和可执行的防护栏。
 
 [Code Is Free]: https://www.youtube.com/watch?v=U2O14Jd3MBU&t=395s
 [Accrue Domain Expertise Through the Work]:
   ../feedback/#accrue-domain-expertise-through-the-work
 
-## Serve users who never see code
+## 服务从未见过代码的用户
 
-The domain expert who shapes the harness and the end user who consumes its
-service are different roles. A scientist or analyst may inspect and retain a
-repeatable script. A support specialist, executive, or customer may work only
-with a domain request and the resulting dataset, investigation, report,
-presentation, decision packet, completed workflow, or application. Ryan argues
-that [not everyone needs to know about or see the code]; the experience
-translates their problem into work the agent can execute well.
+塑造 harness 的领域专家和使用其服务的最终用户是不同的角色。科学家或分析师可能检查并保留一个可重复的脚本。支持专员、高管或客户可能只使用领域请求和产生的数据集、调查报告、演示文稿、决策包、完成的工作流或应用程序。Ryan 认为 [not everyone needs to know about or see the code]；体验将他们的问题转化为 agent 可以良好执行的工作。
 
 [not everyone needs to know about or see the code]:
   https://x.com/_lopopolo/status/2047037215864418486
 
-The user should be able to verify the result in domain terms. The boundary
-exposes controls appropriate to the claim: provenance for sourced conclusions,
-preview and approval for consequential mutations, artifact identity for
-delivered outputs, and observed postconditions for completed workflows. The
-[coherence loop] lets accepted and failed domain artifacts improve context,
-tools, boundaries, and checks for later users. The resulting [proof in the
-user’s domain] does not require the user to review the intermediate program.
+用户应该能够在领域术语中验证结果。边界暴露与声明适当的控制：来源结论的来源、重要变更的预览和批准、已交付输出的工件身份，以及已完成工作流的观察后条件。[coherence loop] 让接受和失败的领域工件改善后续用户的 context、工具、边界和检查。由此产生的 [proof in the user's domain] 不要求用户审查中间程序。
 
 [coherence loop]: ../durable-systems/#make-coherence-cumulative
-[proof in the user’s domain]: ../proof/
+[proof in the user's domain]: ../proof/
 
-## Measure situated effectiveness
+## 衡量有位置感的有效性
 
-The deployment succeeds when the worker can complete valuable work with the
-organization’s current knowledge, quality bar, and authority. Corpus size and
-tool count are inputs. The relevant measures are outcome quality, human
-attention, latency, risk, and maintenance burden.
+当 worker 能够使用组织的当前知识、质量标准和权限完成有价值的工作时，部署就成功了。语料库大小和工具数量是输入。相关的度量是结果质量、人类注意力、延迟、风险和维护负担。
 
-The economic opportunity lies in [putting the model in position to do the work].
-That position is specific to a customer’s knowledge, workflows, environment, and
-authority, which makes the surrounding deployment system part of the product.
+经济机会在于 [putting the model in position to do the work]。该位置针对客户的知识、工作流、环境和权限是特定的，这使得周围的部署系统成为产品的一部分。
 
 [putting the model in position to do the work]:
   https://x.com/_lopopolo/status/2031963382929375432
 
-[Optimize for Measured Effectiveness] develops the evaluation boundary.
+[Optimize for Measured Effectiveness] 阐述了评估边界。
 
 [Optimize for Measured Effectiveness]: ../effectiveness/

@@ -1,6 +1,6 @@
-# Source tools
+# Source 工具
 
-Run these commands from the repository root:
+在仓库根目录下运行以下命令：
 
 - `uv run --script sources/scripts/validate_manifest.py` validates source
   relationships, snapshot custody, hashes, and Twitter-corpus reconciliation.

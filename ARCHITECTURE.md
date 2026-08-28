@@ -1,61 +1,41 @@
 # Architecture
 
-This repository is a retrieval-optimized context bundle. The root introduces
-the practice and routes readers, the agent guide routes a target-specific
-decision, the thesis index names the developed arguments, playbooks turn them
-into proposed procedures, and the source library preserves evidence. Each layer
-points to the next depth without repeating its job.
+该仓库是一个检索优化的 context bundle。根目录引入该实践并路由读者，agent guide 路由特定目标的决策，thesis index 命名已展开的论据，playbooks 将其转化为提出的 procedures，source library 保留证据。每一层指向下一层深度而不重复其工作。
 
-## Retrieval boundary
+## 检索边界
 
-An agent applying the corpus begins with [`AGENTS.md`], reads the target
-system’s local instructions and current state, and loads only the theses
-relevant to the task. Cases and primary sources remain available for deeper
-reasoning, claim tracing, or attribution. The raw corpus is not part of the
-default working set.
+应用该语料库的 agent 从 [`AGENTS.md`] 开始，阅读目标系统的本地 instructions 和当前状态，然后仅加载与任务相关的 theses。案例和 primary sources 保留供更深入的推理、声明溯源或署名使用。原始语料库不属于默认工作集。
 
 [`AGENTS.md`]: AGENTS.md
 
-Editors follow the nested guides in `docs/`, `playbooks/`, and `sources/`.
-Those instructions govern synthesis, repository-authored procedures, provenance,
-redistribution, and source refreshes without entering an ordinary consuming
-trajectory.
+编辑者遵循 `docs/`、`playbooks/` 和 `sources/` 中的嵌套指南。这些指令管理综合、仓库编写的 procedures、来源、再分发和 source refreshes，而无需进入普通的消费轨迹。
 
-## Ownership
+## 所有权
 
-| Path                             | Owns                                                                  |
+| 路径                             | 拥有内容                                                              |
 | -------------------------------- | --------------------------------------------------------------------- |
-| `README.md`                      | Public definition, promise, and entry points                          |
-| `AGENTS.md`                      | Application and unresolved-decision routing for consuming agents      |
-| `ARCHITECTURE.md`                | Document ownership and routing invariants                             |
-| `docs/README.md`                 | The canonical thesis index                                            |
-| `docs/<thesis>/`                 | Developed arguments, cases, and applications                          |
-| `evals/`                         | Comparative evaluation method and longitudinal public cases           |
-| `playbooks/README.md`            | Playbook selection, origin, and evidence status                        |
-| `playbooks/improve-harness.md`   | One bounded baseline-to-rerun intervention loop                        |
-| `playbooks/repository-review.md` | Repository-scale assessment and readiness findings                    |
-| `playbooks/AGENTS.md`            | Instructions for using and editing authored procedures                 |
-| `docs/AGENTS.md`                 | Instructions for writing and reviewing synthesis                      |
-| `assets/`                        | Repository presentation assets                                        |
-| `sources/`                       | Bibliography, source-specific indexes, snapshots, and provenance      |
-| `sources/scripts/`               | Typed source boundaries, validation, tests, and retrieval helpers     |
-| `sources/AGENTS.md`              | Source capture, refresh, and redistribution rules                     |
-| `COPYING.md`                     | License scope, attribution, and rights held by other contributors     |
+| `README.md`                      | 公开定义、承诺和入口点                                                 |
+| `AGENTS.md`                      | 应用和 unresolved-decision routing，面向消费 agents                    |
+| `ARCHITECTURE.md`                | 文档所有权和路由不变量                                                 |
+| `docs/README.md`                 | Canonical thesis index                                                |
+| `docs/<thesis>/`                 | 展开的论据、案例和应用                                                |
+| `evals/`                         | 比较评估方法和纵向公开案例                                             |
+| `playbooks/README.md`            | Playbook 选择、来源和证据状态                                          |
+| `playbooks/improve-harness.md`   | 一个有界的从基线到重运行的干预循环                                     |
+| `playbooks/repository-review.md` | 仓库级评估和就绪性发现                                                 |
+| `playbooks/AGENTS.md`            | 使用和编辑编写的 procedures 的 instructions                            |
+| `docs/AGENTS.md`                 | 编写和审查综合的 instructions                                          |
+| `assets/`                        | 仓库展示资源                                                           |
+| `sources/`                       | 参考文献、source-specific indexes、快照和 provenance                   |
+| `sources/scripts/`               | 类型化的 source boundaries、validation、tests 和 retrieval helpers     |
+| `sources/AGENTS.md`              | Source capture、refresh 和再分发规则                                    |
+| `COPYING.md`                     | 许可范围、署名和其他贡献者持有的权利                                    |
 
-## Invariants
+## 不变量
 
-1. **Keep one navigation contract.** The root introduces and routes,
-   `docs/README.md` indexes, thesis pages synthesize, `evals/` and `playbooks/`
-   house applications, and `sources/` preserves evidence.
-2. **Route just in time.** A normal task receives the smallest relevant thesis
-   set. Cases and source corpora load only when they can change a decision.
-3. **Separate argument from evidence.** A source or premise may support several
-   theses. Full arguments live in thesis pages; the source library routes to or
-   preserves original language and provenance.
-4. **Preserve rights at the boundary.** A local snapshot requires an affirmative
-   redistribution basis. Otherwise the source library keeps canonical and
-   archive links, metadata, bounded quotation, and source notes.
-5. **Test behavioral effect.** The bundle succeeds when it changes engineering
-   decisions, not when an agent repeats its terminology.
-6. **Keep the bundle proportional.** This documentation corpus does not need a
-   build system or dependency graph merely to validate its own links and data.
+1. **保持一个导航契约。** 根目录引入和路由，`docs/README.md` 建索引，thesis pages 综合，`evals/` 和 `playbooks/` 放置应用，`sources/` 保留证据。
+2. **按需路由。** 普通任务接收最小的相关 thesis 集合。仅当案例和 source corpora 能改变决策时才加载。
+3. **将论据与证据分离。** 一个 source 或前提可能支持多个 theses。完整的论据存在于 thesis pages 中；source library 路由或保留原始语言和 provenance。
+4. **在边界上保护权利。** 本地快照需要明确的再分发依据。否则 source library 保留 canonical 和 archive links、metadata、有界引用和 source notes。
+5. **测试行为效果。** 当该 bundle 改变了 engineering decisions 时才算成功，而非 agent 重复其术语。
+6. **保持 bundle 的适度性。** 该文档语料库不需要构建系统或依赖图仅仅是为了验证自身的 links 和数据。

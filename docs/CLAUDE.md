@@ -2,8 +2,5 @@
 
 # Claude Code
 
-- Before landing a substantive public-facing synthesis change, request two
-  independent adversarial reviews: one for claim and source integrity, and one
-  for external-reader signal and noise.
-- Integrate reviewer findings with judgment. Do not concatenate their reports
-  into the prose or narrate the review process to readers.
+- 在发布实质性公开综合变更之前，请求两次独立的对抗性审查：一次针对主张和来源完整性，一次针对外部读者的信号和噪声。
+- 用判断力整合审查发现。不要将他们的报告拼接到散文中，也不要向读者叙述审查过程。

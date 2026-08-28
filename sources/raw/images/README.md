@@ -1,10 +1,8 @@
-# Images for source snapshots
+# Source 快照图片
 
-The SVG files in this directory are unmodified Agent Client Protocol
-architecture diagrams from revision
-[agentclientprotocol/agent-client-protocol@dbbb2b2].
-They preserve the relative image targets in
-[`../acp/architecture.mdx`].
+本目录中的 SVG 文件是来自 revision
+[agentclientprotocol/agent-client-protocol@dbbb2b2] 的未修改 Agent Client Protocol 架构图。
+它们保留了 [`../acp/architecture.mdx`] 中的相对图片引用。
 
 [agentclientprotocol/agent-client-protocol@dbbb2b2]: https://github.com/agentclientprotocol/agent-client-protocol/commit/dbbb2b2d7e1eb4153f60788c0c1a4aba1e657764
 [`../acp/architecture.mdx`]: ../acp/architecture.mdx

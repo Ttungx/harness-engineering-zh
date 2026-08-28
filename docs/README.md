@@ -1,172 +1,118 @@
-# Harness Engineering Theses
+# Harness Engineering 论纲
 
-These twelve theses explain how context, tools, and the surrounding environment
-shape the work a fixed model and coding agent can complete. Each page develops
-the argument through Ryan Lopopolo's articles, talks, interviews, public posts,
-implementation evidence, and related work.
+这十二篇论纲阐述了 context、工具和周围环境如何塑造固定模型与 coding agent 能够完成的工作。每篇文章通过 Ryan Lopopolo 的文章、演讲、访谈、公开帖子、实施证据及相关研究来展开论述。
 
-## Start here
+## 从这里开始
 
-Read [Harness Engineering] for an introduction to the practice. Once a
-target-local decision is unresolved, use this index to choose the one thesis
-that can change it; choose a procedure from the [playbook index] when the task
-calls for an application.
+阅读 [Harness Engineering] 了解该实践的介绍。一旦遇到某个目标局部决策未决，可使用本索引选择能改变它的那篇论纲；当任务需要应用层操作时，从 [playbook 索引] 中选择一个流程。
 
 [Harness Engineering]: ../README.md
-[playbook index]: ../playbooks/
+[playbook 索引]: ../playbooks/
 
-## Theses
+## 论纲
 
-### [Hold the worker constant]
+### [保持 worker 不变]
 
-Treat the chosen model and coding agent as a black box during one adoption
-epoch. Requalify the environment, human priors, ambition, and inner-loop latency
-when that worker changes; preserve useful learned semantics across host
-migrations.
+在单个采用周期内，将选定的模型和 coding agent 视为黑盒。当 worker 发生变更时，重新评估环境、人为先验、目标范围和内部循环延迟；在宿主迁移时保留已习得的有效语义。
 
-[Hold the worker constant]: fixed-worker/
+[保持 worker 不变]: fixed-worker/
 
-### [Deploy into the private process-data iceberg]
+### [部署到私有 process-data 冰山中]
 
-The large applied-AI opportunity is institutional work that depends on private,
-changing process data. Organizations cannot presume that this data will enter
-general model weights or that agents will reliably intuit which parts matter.
-Keep current records, organizational context, and repository knowledge with
-authoritative owners, then compose them into retrievable context and bounded
-capability. Goal-specific context repositories can project those sources for a
-parent worker without replacing them. Code can remain the worker’s internal
-action language for users who consume domain outcomes without reviewing the
-implementation.
+大规模应用 AI 的机遇在于依赖私有且不断变化的 process 数据的机构性工作。组织不能假设这些数据会进入通用模型权重，也不能假设 agent 能可靠地推断哪些部分是重要的。将当前记录、组织 context 和仓库知识保留给权威所有者，然后将它们组合为可检索的 context 和有界能力。面向目标的 context 仓库可以为上层 worker 投射这些资源而不替换它们。对于只消费领域结果而不查看实现的用户，代码仍然可以作为 worker 的内部操作语言。
 
-[Deploy into the private process-data iceberg]: last-mile-deployment/
+[部署到私有 process-data 冰山中]: last-mile-deployment/
 
-### [Give one agent the whole job]
+### [将整个工作交给一个 agent]
 
-Humans provide direction, judgment, and consequential authority. Agents recover
-the outcome behind a sparse prompt. One primary trajectory owns decomposition,
-execution, integration, proof, and safe lifecycle closure.
+人类提供方向、判断和关键决策权。Agent 从一个稀疏的 prompt 中恢复目标背后的成果。一条主要轨迹拥有分解、执行、集成、验证和安全生命周期关闭的职责。
 
-[Give one agent the whole job]: whole-job/
+[将整个工作交给一个 agent]: whole-job/
 
-### [Route context just in time]
+### [即时路由 context]
 
-Keep a large navigable knowledge store and a small active working set. Root
-guidance routes across authoritative sources; runbooks preserve workflows;
-skills teach an approach; checks surface constraints when they become relevant.
-A context-curator sidecar can stage observed gaps, reconcile them with their
-owners, and publish a reviewed projection at an atomic revision.
+保持一个大型可导航知识库和一个小型活跃工作集。根指导跨权威来源路由；runbook 保留工作流；skill 教授方法；checks 在约束变得相关时将其呈现出来。一个 context 策展 sidecar 可以暂存观察到的缺口，与所有者协调，并以原子版本发布经过审核的投射。
 
-[Route context just in time]: just-in-time-context/
+[即时路由 context]: just-in-time-context/
 
-### [Make capabilities legible and operable]
+### [使能力可读且可操作]
 
-Tools are the second external lever. A capability becomes usable through the
-complete loop of discovery, selection, invocation, interpretation, repair, and
-real-system verification.
+工具是第二个外部杠杆。一项能力通过发现、选择、调用、解释、修复和真实系统验证的完整循环变得可用。
 
-[Make capabilities legible and operable]: tool-legibility/
+[使能力可读且可操作]: tool-legibility/
 
-### [Make the repository teach the agent]
+### [让仓库教会 agent]
 
-Code the agent reads becomes prompt material. The repository makes local
-nonfunctional requirements recoverable through canonical owners, repeated
-structures, completed migrations, examples, types, and executable constraints.
-The agent can infer what good looks like and transfer that context across the
-repository.
+Agent 阅读的代码成为 prompt 素材。仓库通过规范所有者、重复结构、已完成的迁移、示例、类型和可执行约束使本地非功能性需求可恢复。Agent 可以推断出好的样子，并将该 context 跨仓库迁移。
 
-[Make the repository teach the agent]: domain-modeling/
+[让仓库教会 agent]: domain-modeling/
 
-### [Maximize autonomy inside explicit authority]
+### [在明确权限内最大化自主性]
 
-Keep capability and authority as separate contracts. Let the worker act broadly
-in reversible environments; make consequential grants scoped, revocable,
-auditable, and recoverable.
+将能力和权限作为独立的契约。允许 worker 在可逆环境中广泛行动；使关键授权具有范围限定、可撤销、可审计和可恢复性。
 
-[Maximize autonomy inside explicit authority]: authority/
+[在明确权限内最大化自主性]: authority/
 
-### [Prove the outcome in the real environment]
+### [在真实环境中验证结果]
 
-Match evidence to the user or operational claim. A green check proves only its
-assertion; browser journeys, corpora, traces, canaries, and deployed health
-close different loops.
+将证据与用户或运营声明匹配。绿色勾选仅证明其断言；浏览器流程、语料库、trace、金丝雀和部署健康检查关闭不同的循环。
 
-[Prove the outcome in the real environment]: proof/
+[在真实环境中验证结果]: proof/
 
-### [Turn feedback into infrastructure]
+### [将反馈转化为基础设施]
 
-Trajectory evidence, MLD, review, and incidents can expose missing harness
-capabilities. Stable lessons move into their earliest durable owner.
-Mechanically enforceable principles can drive cleanup across a discoverable
-population, reducing stale precedent for later work.
+轨迹证据、MLD、审查和事件可以暴露缺失的 harness 能力。稳定的教训进入它们最早的持久所有者。可机械化执行的原则可以驱动跨可发现群体的清理工作，减少后续工作中的过时先例。
 
-[Turn feedback into infrastructure]: feedback/
+[将反馈转化为基础设施]: feedback/
 
-### [Preserve coherence and own lifetime risk]
+### [保持一致性并承担生命周期风险]
 
-Abundant implementation makes future coherence and lifetime ownership scarce. A
-feedback-controlled environment carries lived judgment into later work while
-preserving behavioral contracts, migration integrity, dependency evidence,
-release identity, and proportional controls.
+充足的实现使得未来的一致性和生命周期所有权变得稀缺。一个反馈控制的环境将活生生的判断带入后续工作，同时保留行为契约、迁移完整性、依赖证据、发布身份和比例控制。
 
-[Preserve coherence and own lifetime risk]: durable-systems/
+[保持一致性并承担生命周期风险]: durable-systems/
 
-### [Run known work as a continuous loop]
+### [将已知工作作为持续循环运行]
 
-Settled outcomes with signal, proof, and authority can enter repository-owned
-loops; unresolved product invention remains foreground work. Durable state,
-feedback, and retirement conditions keep each run aligned with the current
-world.
+带有信号、验证和权威的已确定成果可以进入仓库拥有的循环；未解决的产品发明仍然是前台工作。持久状态、反馈和退役条件使每次运行与当前世界保持一致。
 
-[Run known work as a continuous loop]: continuous-maintenance/
+[将已知工作作为持续循环运行]: continuous-maintenance/
 
-### [Optimize for measured effectiveness][effectiveness]
+### [针对实际有效性进行优化][effectiveness]
 
-Tokens, lines, agents, and checks are inputs. Optimize useful outcomes per unit
-of scarce human attention, with acceptable latency, risk, and maintenance.
+Token、行数、agent 和 checks 都是输入。优化每单位稀缺人类注意力的有用成果，同时保持可接受的延迟、风险和维护成本。
 
 [effectiveness]: effectiveness/
 
-## Applications
+## 应用
 
-### [Improve one harnessed job]
+### [改进一个已接入的工作]
 
-Observe one representative trajectory, locate its earliest failed handoff, make
-the smallest authorized and reversible intervention at the owning boundary, and
-use a fresh rerun to decide whether to retain, revise, or remove it. Test without
-the intervention when its added value remains unclear.
+观察一个代表性轨迹，找到它最早失败的交接点，在所有权边界处进行最小的授权和可逆干预，然后通过一次全新的重跑来决定保留、修改还是移除它。当其附加价值仍不明确时，在没有干预的情况下进行测试。
 
-[Improve one harnessed job]: ../playbooks/improve-harness.md
+[改进一个已接入的工作]: ../playbooks/improve-harness.md
 
-### [Review a repository]
+### [审查一个仓库]
 
-Follow representative jobs from request through delivery, then locate missing
-context, capability, ownership, proof, authority, and feedback at their owning
-boundaries.
+从请求到交付跟踪代表性工作，然后在其所有权边界处找到缺失的 context、能力、所有权、验证、权限和反馈。
 
-[Review a repository]: ../playbooks/repository-review.md
+[审查一个仓库]: ../playbooks/repository-review.md
 
-### [Evaluate the harness]
+### [评估 harness]
 
-Isolate one harness intervention under a fixed worker condition. Keep target
-truth with its owner, use implementation-neutral contract rubrics, and measure
-accepted outcomes, proof, architecture, and trajectory cost separately.
+在固定的 worker 条件下隔离单个 harness 干预。将目标真相保留给其所有者，使用与实现无关的契约评估标准，并分别衡量接受的结果、验证、架构和轨迹成本。
 
-[Evaluate the harness]: ../evals/
+[评估 harness]: ../evals/
 
-## Related work
+## 相关研究
 
-### [Influences and alternate framings]
+### [影响与替代框架]
 
-matklad’s architecture writing, Artichoke’s living architecture, “Parse, don’t
-validate,” and Strangler Fig are earlier influences. Birgitta Böckeler’s Fowler-
-site article appeared after Ryan’s February 11, 2026 essay and is a later
-alternate framing.
+matklad 的架构写作、Artichoke 的活架构、"Parse, don't validate" 和 Strangler Fig 是更早的影响。Birgitta Böckeler 发表在 Fowler 网站上的文章出现在 Ryan 2026 年 2 月 11 日的论文之后，是一个较晚的替代框架。
 
-[Influences and alternate framings]: lineage/
+[影响与替代框架]: lineage/
 
-## Evidence
+## 证据
 
-The [source library] indexes essays, interviews, talks, cases, the public-post
-corpus, influences, and alternate framings.
+[来源库] 索引了论文、访谈、演讲、案例、公开帖子语料库、影响和替代框架。
 
-[source library]: ../sources/
+[来源库]: ../sources/

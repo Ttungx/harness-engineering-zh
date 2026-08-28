@@ -1,106 +1,56 @@
-# Infrastructure as a Typed Control Plane
+# 作为类型化控制平面的基础设施
 
-Ryan’s private homelab repository treats infrastructure changes as typed,
-testable domain operations. It combines infrastructure definitions, host
-configuration, deployed services, local operator tooling, generated
-configuration, monitoring, documentation, and operations that can cut off their
-own recovery path. A human operator and an agent must both be able to act
-without reconstructing years of context from memory.
+Ryan 的私有 homelab 仓库将基础设施变更视为类型化、可测试的领域操作。它结合了基础设施定义、主机配置、已部署服务、本地操作员工具、生成的配置、监控、文档，以及可能切断自身恢复路径的操作。人类操作员和 agent 都必须能够在不从记忆中重建多年上下文的情况下采取行动。
 
-## Risks the harness must own
+## Harness 必须拥有的风险
 
-The repository spans several technical universes. Declarative infrastructure
-describes cloud and local resources. Configuration management converges hosts.
-Deployed Go services run on the network. A separate Go universe provides local
-development and operator tools. Python supports infrastructure automation and
-linting. Node is retained only for deterministic text formatting. Generated
-monitoring configuration must agree with inventory and source configuration.
+该仓库跨越多个技术领域。声明式基础设施描述云和本地资源。配置管理收敛主机。已部署的 Go 服务在网络上运行。一个独立的 Go 领域提供本地开发和操作员工具。Python 支持基础设施自动化和 lint。Node 仅保留用于确定性的文本格式化。生成的监控配置必须与 inventory 和源配置保持一致。
 
-Those surfaces have different failure modes:
+这些表面具有不同的故障模式：
 
-- a stale document can produce a wrong but plausible operational decision;
-- a duplicated tool version can make local and CI behavior diverge;
-- a floating artifact selector can change a deployment without a reviewed
-  repository diff;
-- a command that mixes parsing, defaulting, and execution can silently target
-  the wrong system;
-- a malformed remote script can partially execute if transfer is truncated;
-- an upgrade to the software providing remote access can destroy the access path
-  needed to repair it; and
-- removing a dependency can reduce provenance risk while increasing locally
-  owned correctness risk.
+- 一个过时的文档可能产生错误但合理的运营决策；
+- 一个重复的工具版本可能使本地和 CI 行为产生分歧；
+- 一个浮动的 artifact 选择器可能在没有经过审查的仓库 diff 的情况下更改部署；
+- 一个混合了解析、默认值和执行的命令可能静默地针对错误的系统；
+- 一个格式错误的远程脚本在传输被截断时可能部分执行；
+- 提供远程访问的软件升级可能破坏修复所需的访问路径；以及
+- 移除依赖可以降低溯源风险，但同时增加本地拥有的正确性风险。
 
-The harness makes these risks legible and assigns each one to an architectural
-or operational owner.
+Harness 使这些风险可读，并将每个风险分配给一个架构或运营 owner。
 
-## Route context just in time
+## 及时路由上下文
 
-The root agent guide is intentionally short. It establishes the operating
-contract, maps the major repository domains, names the normal verification
-commands, and routes work to specialist documents. Those documents carry Go
-design, dependency review, documentation style, and high-risk deployment
-guidance.
+根 agent 指南有意保持简短。它建立了操作 contract，映射主要仓库领域，命名正常的验证命令，并将工作路由到专业文档。这些文档承载 Go 设计、依赖审查、文档风格和高风险部署指导。
 
-The specialist documents have distinct jobs:
+专业文档有各自不同的职责：
 
-- the Go operating model explains package ownership, typed boundaries,
-  capability-shaped interfaces, and command structure;
-- the domain-first model provides worked examples of turning transport data into
-  durable domain values;
-- the dependency model explains how to choose between the standard library, a
-  trusted specialist, and repository-owned code;
-- the documentation guide defines what belongs in durable run memory; and
-- one versioned contract per scheduled role defines scope, authority,
-  validation, reporting, and escalation.
+- Go 操作模型解释包所有权、类型化边界、capability 形状的接口和命令结构；
+- 领域优先模型提供了将传输数据转化为持久领域值的实例；
+- 依赖模型解释如何在标准库、受信任的专业库和仓库拥有的代码之间做出选择；
+- 文档指南定义了什么属于持久运行记忆；以及
+- 每个调度角色的版本化 contract 定义了范围、权限、验证、报告和升级。
 
-This creates progressive disclosure. A dependency update does not need the full
-deployment runbook. A deployment change does need the Go operating model and the
-relevant safety contract. The repository is the durable system of record.
+这创造了渐进式披露。依赖更新不需要完整的部署运行手册。部署变更确实需要 Go 操作模型和相关的安全 contract。仓库是持久的记录系统。
 
-The guide also states a repeatable loop: classify the task, read the routed
-context, inspect the existing ownership boundary, make a scoped change, run
-proportional proof, and record any newly durable lesson in the repository. That
-last step turns a successful session into a better environment for the next
-session.
+指南还陈述了一个可重复的循环：对任务分类、读取路由的上下文、检查现有的所有权边界、进行有范围的变更、运行成比例的证明，并将任何新学到的持久经验记录在仓库中。最后一步将成功的会话转化为下一个会话更好的环境。
 
-### Keep operational docs current
+### 保持运营文档最新
 
-A scheduled documentation-freshness role keeps operator guidance aligned with
-the configuration that provisions and monitors the homelab. It compares operator
-pages with nearby evidence in configuration management, infrastructure
-definitions, monitoring, home automation, repository tooling, and workflow and
-dependency metadata. Each finding names the stale or missing page, the source
-configuration that contradicts or supplements it, a concrete correction, and any
-uncertainty requiring human judgment.
+一个调度的文档新鲜度角色使操作员指导与配置 homelab 的配置保持一致。它将操作员页面与配置管理、基础设施定义、监控、家庭自动化、仓库工具以及工作流和依赖元数据中的附近证据进行比较。每个发现命名过时或缺失的页面、矛盾或补充它的源配置、具体的修正，以及任何需要人类判断的不确定性。
 
-The role is report-only by default. It cannot edit files, create a branch, or
-open a pull request without an explicit follow-up. It prioritizes drift that can
-affect safe operation—inventory, routing, backup, monitoring, scheduled work,
-versions, and access paths—and leaves style-only churn alone. Local repository
-evidence takes precedence over inference; claims about outside behavior require
-an authoritative upstream source.
+该角色默认是只读的。它不能编辑文件、创建分支或在没有明确后续的情况下打开 pull request。它优先处理可能影响安全运营的漂移——inventory、路由、备份、监控、调度工作、版本和访问路径——而对仅风格的变动不予处理。本地仓库证据优先于推断；关于外部行为的声明需要权威的上游来源。
 
-The role's versioned contract also owns its learning loop. Human responses to
-those findings, pull-request review, and failed validation become candidates for
-improving the next sweep. Automation-authored comments carry a stable marker so
-the role does not mistake its own output for human supervision.
+该角色的版本化 contract 还拥有其学习循环。人类对这些发现的响应、pull request 审查和失败的验证成为改进下一次扫描的候选项。自动化编写的评论带有稳定的标记，以便该角色不会将自己的输出误认为人类监督。
 
-## Let architecture carry instructions
+## 让架构承载指令
 
-The repository divides Go into two package universes. One contains local
-operator and development tooling; the other contains deployed services and
-shared runtime packages. Production code in the deployed universe cannot import
-the local-tooling universe. A repository lint enforces that direction, while
-tests may cross the boundary to assert repository-wide invariants.
+仓库将 Go 分为两个包 universe。一个包含本地操作员和开发工具；另一个包含已部署的服务和共享运行时包。已部署 universe 中的生产代码不能导入本地工具 universe。仓库 lint 强制执行该方向，而测试可以跨越边界来断言仓库范围的不变量。
 
-This is architecture as prompt. A worker does not have to infer whether a
-deployment policy helper belongs in a runtime binary. The dependency direction
-answers the question, and CI rejects the wrong answer.
+这就是作为 prompt 的架构。Worker 不必推断部署策略 helper 是否属于运行时二进制文件。依赖方向回答了这个问题，CI 会拒绝错误的答案。
 
-### Domain ownership before command shape
+### 领域所有权优先于命令形状
 
-Commands adapt inputs and execution around domain-owned policy. The preferred
-pipeline is:
+命令围绕领域拥有的策略适配输入和执行。首选管道是：
 
 ```go
 raw, err := flags.Parse(args)
@@ -116,28 +66,19 @@ if err != nil {
 return operation.Run(ctx, opts, capabilities)
 ```
 
-The three representations are intentionally different:
+这三个表示有意不同：
 
-1. `raw` preserves what the operator supplied;
-2. `opts` contains parsed domain values and defaults resolved from explicit
-   sources of truth; and
-3. the operation receives values that are already valid plus only the
-   capabilities it needs.
+1. `raw` 保留操作员提供的内容；
+2. `opts` 包含解析后的领域值和从显式真相来源解析的默认值；以及
+3. 操作接收已经有效的值加上它所需的 capability。
 
-A custom lint prohibits raw flag-set construction outside command-owned flag
-packages. Another limits direct process construction to a small set of adapter
-boundaries. Domain packages receive a repository-rooted command capability or a
-narrow transport interface instead of inventing working directories,
-environments, and subprocess behavior.
+自定义 lint 禁止在命令拥有的 flag 包之外进行原始 flag-set 构造。另一个限制直接进程构造仅限于少数 adapter 边界。领域包接收仓库根植的命令 capability 或窄传输接口，而不是自行发明工作目录、环境和子进程行为。
 
-### Keep relationships inside values
+### 将关系保留在值中
 
-External inventory output is decoded into an internal transport representation
-and converted into domain values that retain their parent context. A host-like
-value therefore knows the cluster-like value needed to answer naming and
-targeting questions. Callers request a fully formed target from those values.
+外部 inventory 输出被解码为内部传输表示，并转换为保留其父上下文的领域值。因此，类主机的值知道回答命名和定位问题所需的类集群值。调用者从这些值请求一个完全形成的目标。
 
-In generalized form:
+在泛化形式中：
 
 ```go
 type Environment struct{ state environmentState }
@@ -150,45 +91,31 @@ func (m Machine) Address() Address
 func (m Machine) RemoteTarget() Target
 ```
 
-This prevents a caller from holding a machine without the context required to
-interpret it. It also prevents dozens of callers from independently rebuilding
-naming policy with strings.
+这防止调用者在没有解释它所需的上下文的情况下持有机器。它还防止数十个调用者使用字符串独立地重建命名策略。
 
-The same technique appears in remote operations. User-provided target strings
-are parsed once into typed targets, sources, and destinations. Read, write,
-copy, and reachability are separate public capabilities. SSH, archive formats,
-checksums, staging, and shell commands remain internal mechanisms.
+相同的技术出现在远程操作中。用户提供的目标字符串被解析一次为类型化的目标、源和目的地。读取、写入、复制和可达性是独立的 public capability。SSH、归档格式、校验和、暂存和 shell 命令仍然是内部机制。
 
-## Make repository policy semantic code
+## 使仓库策略成为语义代码
 
-The repository contains a catalog of focused, repository-owned lints. They
-complement general linters with repository-specific rules. The catalog currently
-protects concerns such as:
+仓库包含一个集中的、仓库拥有的 lint 目录。它们用仓库特定的规则补充通用 linter。该目录目前保护的关注点包括：
 
-- the boundary between local tooling and deployed code;
-- placement of raw CLI parsing;
-- the small set of packages allowed to create processes;
-- interrupt-aware contexts in executable entry points;
-- checked write errors for formatted output;
-- a ban on local lint-suppression comments;
-- immutable selectors across workflows, infrastructure, and package manifests;
-- agreement between the canonical Python pin and workflow installs;
-- agreement between the canonical Python pin and static-analysis language
-  targets;
-- safe structure for shell templates sent to remote machines; and
-- discoverable purpose documentation for every custom lint and every owned
-  configuration-management role.
+- 本地工具和已部署代码之间的边界；
+- 原始 CLI 解析的放置位置；
+- 允许创建进程的少量包；
+- 可执行入口点中的中断感知上下文；
+- 格式化输出的已检查写入错误；
+- 禁止本地 lint 抑制注释；
+- 跨工作流、基础设施和包 manifest 的不可变选择器；
+- 规范 Python 固定版本与工作流安装之间的一致性；
+- 规范 Python 固定版本与静态分析语言目标之间的一致性；
+- 发送到远程机器的 shell 模板的安全结构；以及
+- 每个自定义 lint 和每个拥有的配置管理角色的可发现目的文档。
 
-Each lint has a local explanation of the invariant and why it exists. Its
-diagnostic includes the remediation path. Tests exercise both the live
-repository and small positive and negative in-memory fixtures. This matters for
-agents: a failure identifies the violated invariant and the boundary that owns
-the correction.
+每个 lint 都有一个关于不变量及其存在原因的本地解释。其诊断包括补救路径。测试既练习活动仓库，也练习小型正面和负面的内存 fixture。这对 agent 很重要：失败会识别被违反的不变量和拥有修正的边界。
 
-### Model facts and parse canonical files
+### 建模事实并解析规范文件
 
-The strongest policy checks load the canonical file through a domain parser and
-ask a semantic question:
+最强的策略检查通过领域解析器加载规范文件并提出语义问题：
 
 ```go
 toolchains := LoadToolchainManifest(repo)
@@ -200,126 +127,74 @@ for _, setup := range workflows.NodeSetups() {
 }
 ```
 
-The same model is used for the Go module, package manifest, package-manager
-workspace, Python project, Terraform configuration, workflow YAML, and
-configuration-management defaults. A version bump changes the canonical data and
-the lockfile it owns. Tests derive expected cross-surface values from that data.
-Parser fixtures use arbitrary representative versions to test parsing; they do
-not become another source of current-version truth.
+相同的模型用于 Go module、包 manifest、包管理器 workspace、Python 项目、Terraform 配置、工作流 YAML 和配置管理默认值。版本更改会更改规范数据及其拥有的 lockfile。测试从该数据派生预期的跨表面值。解析器 fixture 使用任意代表性版本来测试解析；它们不会成为另一个当前版本真相的来源。
 
-This creates an important distinction:
+这创造了一个重要的区分：
 
-- **current state is data**: runtime and tool versions live in their canonical
-  manifests; and
-- **durable policy is code**: exact pinning, a cooling-off interval, a minimum
-  maturity rule, an approved trust class, or a required relationship can be a
-  named domain concept.
+- **当前状态是数据**：运行时和工具版本存在于其规范 manifest 中；以及
+- **持久策略是代码**：精确固定、冷却期、最低成熟度规则、已批准的信任类或所需关系可以成为命名的领域概念。
 
-Confusing those categories produces brittle policy: duplicated current-version
-constants, large string-built fixtures, and unrelated fixture edits for every
-upgrade. Separating them makes ordinary maintenance small while keeping the real
-invariant executable.
+混淆这些类别会产生脆弱的策略：重复的当前版本常量、大型字符串构建的 fixture，以及每次升级时不相关的 fixture 编辑。将它们分离使日常维护变得简单，同时保持真正的不变量可执行。
 
-## Let supply-chain policy follow capabilities
+## 让供应链策略跟随 capability
 
-The repository carries a small, classified dependency set. It retains
-specialists where they own a difficult domain: the official parser for an
-infrastructure language, first-party cloud and networking clients, mature system
-integration, a line-aware YAML parser, and selected high-trust Go ecosystem
-packages. Direct dependencies are classified by capability and upstream trust
-boundary. A new unclassified direct dependency fails with a prompt to perform a
-design review.
+仓库携带少量分类的依赖集。它在它们拥有困难领域时保留专业库：基础设施语言的官方解析器、一流的云和网络客户端、成熟的系统集成、行感知 YAML 解析器，以及选定的高信任 Go 生态系统包。直接依赖按 capability 和上游信任边界分类。一个新的未分类直接依赖会失败并提示进行设计审查。
 
-The policy asks four questions before adding or removing code:
+策略在添加或删除代码之前问四个问题：
 
-1. What exact capability is needed?
-2. Which domain owns it?
-3. Is the behavior narrow and stable enough to own locally?
-4. Which choice produces the lower total correctness, security, update, and
-   maintenance risk?
+1. 需要什么精确的 capability？
+2. 哪个领域拥有它？
+3. 该行为是否足够窄和稳定以在本地拥有？
+4. 哪个选择产生更低的总体正确性、安全性、更新和维护风险？
 
-That leads to several concrete controls:
+这导致了几个具体的控制：
 
-- a single toolchain manifest is the canonical source for language and
-  bootstrap-tool versions;
-- CI setup steps are checked against that manifest or the language's canonical
-  module file;
-- direct dependencies and tool dependencies must belong to approved capability
-  classes;
-- package-manager selection is exact and integrity-qualified;
-- Node has no runtime dependency surface and is retained only for a single
-  deterministic formatter;
-- CI actions use immutable commit identifiers with human-readable release
-  comments;
-- runner images are fixed rather than selected by a moving `latest` label;
-- container and downloaded deployment inputs are versioned or content-addressed
-  and checksummed;
-- default workflow permissions are read-only, with additional authority scoped
-  to the job that needs it; and
-- cloud validation uses short-lived identity federation rather than stored
-  long-lived credentials.
+- 单个工具链 manifest 是语言和引导工具版本的规范来源；
+- CI 设置步骤根据该 manifest 或语言的规范模块文件进行检查；
+- 直接依赖和工具依赖必须属于已批准的 capability 类；
+- 包管理器选择是精确的和完整性限定的；
+- Node 没有运行时依赖表面，仅保留用于单个确定性格式化器；
+- CI action 使用带有可读发布注释的不可变 commit 标识符；
+- 运行器镜像被固定而不是通过移动的 `latest` 标签选择；
+- 容器和下载的部署输入是版本化的或内容寻址的并带有校验和；
+- 默认工作流权限是只读的，额外权限限定到需要它的 job；以及
+- 云验证使用短期身份联合而不是存储的长期凭证。
 
-### One policy, several ecosystem renderings
+### 一个策略，多个生态系统表示
 
-One small domain value owns the cooling-off interval and renders it into the
-units and syntax expected by the dependency updater, the Node package manager,
-and the Python resolver. Tests then load each real configuration and compare its
-semantic value with the shared policy.
+一个小的领域值拥有冷却期，并将其渲染为依赖更新器、Node 包管理器和 Python 解析器期望的单位和语法。测试然后加载每个真实配置并将其语义值与共享策略进行比较。
 
-This is a compact but representative harness pattern: centralize policy meaning
-while each ecosystem retains its native representation. The repository owns the
-relationship among them.
+这是一个紧凑但有代表性的 harness 模式：集中策略含义，同时每个生态系统保留其原生表示。仓库拥有它们之间的关系。
 
-The update automation adds judgment that cannot be reduced to semver alone. It
-classifies an upstream as patch-rich, patch-light, or tagless; applies a
-cooling-off window; inspects authoritative release artifacts; preserves old
-checksums when they provide rollback value; separates logical update domains
-into reviewable changes; and fails closed when provenance or release behavior is
-ambiguous.
+更新自动化添加了无法仅归结为 semver 的判断。它将上游分类为 patch-rich、patch-light 或 tagless；应用冷却窗口；检查权威发布 artifact；在它们提供回滚价值时保留旧校验和；将逻辑更新域分离为可审查的变更；以及在溯源或发布行为不明确时失败关闭。
 
-## Transfer responsibility when removing a Markdown dependency
+## 在移除 Markdown 依赖时转移责任
 
-The deployed documentation service once depended on a general Markdown
-implementation. The repository replaced it with a first-party implementation
-because the required dialect was constrained and the general dependency carried
-more capability and supply-chain surface than the service needed.
+已部署的文档服务曾经依赖一个通用的 Markdown 实现。仓库用一流实现替换了它，因为所需的方言是受限的，而通用依赖携带了比服务所需更多的 capability 和供应链表面。
 
-The replacement transferred four explicit responsibilities into the repository:
+替换将四个显式责任转移到仓库中：
 
-- an abstract syntax tree defines the supported document model;
-- a parser converts source into that model;
-- a renderer converts the model into HTML; and
-- a sanitizer owns URL schemes, generated identifiers, and CSS-class tokens.
+- 抽象语法树定义了支持的文档模型；
+- 解析器将源代码转换为该模型；
+- 渲染器将模型转换为 HTML；以及
+- 消毒器拥有 URL scheme、生成的标识符和 CSS 类 token。
 
-The supported surface is documented by behavior rather than an unsupported claim
-of full standards compliance. Confidence comes from several independent proof
-layers:
+支持的表面通过行为而不是不支持的完全标准兼容性声明来记录。信心来自几个独立的证明层：
 
-- golden Markdown/HTML fixture pairs for the service's real feature set;
-- edge-case vectors for block and inline parsing;
-- selected upstream CommonMark and GitHub-flavored Markdown vectors;
-- a test that parses and renders the complete checked-in documentation corpus;
-- tests for unsafe link schemes, escaping, fragment generation, writer errors,
-  and cancellation; and
-- aggregate statement coverage of the parser, syntax tree, renderer, and
-  sanitizer enforced at 100 percent in the normal race-enabled test path.
+- 服务真实功能集的黄金 Markdown/HTML fixture 对；
+- 块和内联解析的边缘情况向量；
+- 选定的上游 CommonMark 和 GitHub flavored Markdown 向量；
+- 解析和渲染完整签入文档语料库的测试；
+- 不安全链接 scheme、转义、片段生成、写入器错误和取消的测试；以及
+- 解析器、语法树、渲染器和消毒器的聚合语句覆盖率，在正常启用 race 的测试路径中强制为 100%。
 
-Coverage ratchets branch exercise. Golden vectors and corpus tests establish
-compatibility; sanitizer tests protect the security boundary; race and
-error-path tests establish operational behavior.
+覆盖率棘轮分支执行。黄金向量和语料库测试建立兼容性；消毒器测试保护安全边界；race 和错误路径测试建立运营行为。
 
-The maintenance trade is explicit. The repository removed an upstream maintainer
-and transitive graph from the deployed service, but it accepted ownership of
-parsing ambiguity, escaping, standards drift, and future feature requests. The
-replacement is credible because the confidence surface grew when the dependency
-surface shrank.
+维护权衡是显式的。仓库从已部署服务中移除了一个上游维护者和传递图，但它接受了对解析模糊性、转义、标准漂移和未来功能请求的所有权。替换是可信的，因为当依赖表面缩小时，信心表面增长了。
 
-## Model consequential operations as a state machine
+## 将重要操作建模为 state machine
 
-The clearest operational example is upgrading the remote-access software on a
-constrained robot-vacuum device. A failed production replacement could remove
-the network path needed to repair the device. The harness therefore models the
-operation as phases with different identities, state, and authority.
+最清晰的运营示例是在受限的扫地机器人设备上升级远程访问软件。失败的生产替换可能删除修复设备所需的网络路径。因此 harness 将该操作建模为具有不同身份、状态和权限的阶段。
 
 ```mermaid
 flowchart TD
@@ -334,64 +209,32 @@ flowchart TD
     verify --> retain["Stop canary and retain recovery state"]
 ```
 
-The scheduled role may inspect upstream releases, compare feature-selection
-behavior, reason about required networking capabilities, and perform a local
-cross-build. It cannot deploy. Missing release notes, unclear feature changes,
-or behavior touching remote access and routing stops the automation for human
-review.
+该调度角色可能会检查上游发布、比较功能选择行为、推理所需的网络能力，并执行本地交叉构建。它不能部署。缺失的发布说明、不明确的功能更改或涉及远程访问和路由的行为会停止自动化以供人类审查。
 
-After approval, the canary uses a separate binary slot, runtime state,
-communication socket, log, and network identity. Staging must not overwrite
-production state or reboot the device. Production promotion requires a fresh
-backup. Cutover is performed through the independently verified canary access
-path, and both access and logs are checked before the isolated daemon is
-stopped. Recovery state is retained.
+批准后，canary 使用单独的二进制槽位、运行时状态、通信 socket、日志和网络身份。暂存不得覆盖生产状态或重新启动设备。生产推广需要全新的备份。切换通过独立验证的 canary 访问路径执行，在隔离守护进程停止之前检查访问和日志。恢复状态被保留。
 
-The command surface mirrors the state machine. Build, canary deploy, canary
-authentication, canary access check, production backup, promotion, production
-verification, and canary cleanup are separate operations rather than flags on
-one permissive deploy command. Typed targets and a narrow remote transport make
-the phases unit-testable. Recording fakes prove which identity each phase uses,
-which remote writes occur, and—critically—which production mutations do not
-occur during canary work.
+命令表面镜像 state machine。构建、canary 部署、canary 认证、canary 访问检查、生产备份、推广、生产验证和 canary 清理是独立的操作，而不是一个宽容部署命令上的标志。类型化目标和窄远程传输使阶段可单元测试。录制 fake 证明了每个阶段使用的身份、发生的远程写入，以及——关键的是——在 canary 工作期间不发生的生产变更。
 
-Remote shell scripts have another unusual guardrail. Their executable body must
-be contained in a `main` function invoked exactly once at the end. If transfer
-is truncated, the device may receive definitions but cannot execute a partial
-operation. A custom lint enforces the shebang, strict mode, body shape, and
-single final invocation. This is a small invariant derived from the actual
-failure mode of streaming scripts over a remote transport.
+远程 shell 脚本有另一个不寻常的防护栏。其可执行主体必须包含在一个 `main` 函数中，在末尾恰好调用一次。如果传输被截断，设备可能会收到定义但无法执行部分操作。自定义 lint 强制执行 shebang、严格模式、主体形状和单次最终调用。这是从通过远程传输流式传输脚本的实际故障模式中派生的一个小不变量。
 
-## Close the feedback loop with versioned automations
+## 用版本化自动化关闭反馈循环
 
-Scheduled prompts are intentionally slim. They identify a role and direct the
-agent to the versioned contract in the repository. The contract defines:
+调度 prompt 有意保持精简。它们标识一个角色并将 agent 引导到仓库中的版本化 contract。该 contract 定义：
 
-- the owned scope and explicit exclusions;
-- whether the default mode is report-only, change-producing, build-only, or
-  deploy-capable;
-- authoritative sources to inspect;
-- cooling-off and risk classification;
-- required validation and evidence;
-- commit, pull-request, and review behavior;
-- human approval and abort conditions; and
-- the final summary schema.
+- 拥有的范围和显式排除项；
+- 默认模式是只读、产生变更、仅构建还是可部署；
+- 要检查的权威来源；
+- 冷却和风险分类；
+- 所需的验证和证据；
+- commit、pull request 和审查行为；
+- 人类批准和中止条件；以及
+- 最终摘要 schema。
 
-Examples include dependency maintenance, documentation freshness, controlled
-guest updates, documentation deployment, and the high-consequence device
-upgrade. The documentation-freshness role is report-only by default. The
-high-consequence upgrade role can prepare and build but not deploy. A routine
-documentation publisher may deploy only from a clean, current primary-branch
-checkout and lets a domain command derive its target from canonical inventory.
+示例包括依赖维护、文档新鲜度、受控客户更新、文档部署和高后果设备升级。文档新鲜度角色默认是只读的。高后果升级角色可以准备和构建但不能部署。常规文档发布者可能仅从干净的、当前的主分支检出进行部署，并让领域命令从规范 inventory 派生其目标。
 
-Automation-authored comments carry a stable marker so a later run can
-distinguish its own state from human review. Each contract requires the next run
-to inspect human feedback, failed validation, and follow-up requests and then
-update the durable contract or guardrail before repeating the same class of
-mistake. Task memory stores run-specific state; repository documentation stores
-behavior that must survive the run.
+自动化编写的评论带有稳定的标记，以便后续运行可以将其自身状态与人类审查区分开来。每个 contract 要求下一次运行检查人类反馈、失败的验证和后续请求，然后在重复相同类别的错误之前更新持久 contract 或防护栏。任务记忆存储运行特定的状态；仓库文档存储必须在运行中存活的行为。
 
-This is a concrete closed loop:
+这是一个具体的闭环：
 
 ```mermaid
 flowchart LR
@@ -401,131 +244,71 @@ flowchart LR
     control --> run
 ```
 
-## Generate observability from source of truth
+## 从真相来源生成可观测性
 
-Repository tools generate monitoring configuration from typed inventory and
-configuration-management intent. They apply domain selection rules and render
-scrape targets, service state metrics, and log-routing inputs. Check modes
-compare regenerated output with the checked-in artifact and fail with the exact
-command that refreshes it.
+仓库工具从类型化 inventory 和配置管理意图生成监控配置。它们应用领域选择规则并渲染 scrape 目标、服务状态指标和日志路由输入。检查模式将重新生成的输出与签入的 artifact 进行比较，并以刷新它的确切命令失败。
 
-An inventory transition changes the monitoring view through the same domain
-values used by operator tools. Tests protect selection before serialization:
-which machines are current, which roles imply a log agent, which endpoints
-belong in a scrape job, and which retired targets must disappear. Golden output
-verifies the final rendering.
+inventory 转换通过操作员工具使用的相同领域值更改监控视图。测试保护序列化之前的选择：哪些机器是当前的、哪些角色意味着日志 agent、哪些端点属于 scrape job，以及哪些已退役的目标必须消失。黄金输出验证最终渲染。
 
-The repository also exposes desired infrastructure state as metrics and gives
-deployed services narrow readiness and access-log surfaces. Remote rendered
-configuration can be collected through typed read capabilities for comparison
-with repository intent. In the high-risk deployment flow, separate canary and
-production logs plus explicit remote-access checks are required proof, not
-optional troubleshooting aids.
+仓库还将期望的基础设施状态作为指标暴露，并为已部署的服务提供窄的就绪性和访问日志表面。远程渲染的配置可以通过类型化读取能力收集，以便与仓库意图进行比较。在高风险部署流程中，单独的 canary 和生产日志加上显式远程访问检查是必需的证明，而不是可选的故障排除辅助工具。
 
-The pattern is broader than monitoring: derive observability from the same
-source of truth as operation, and make the evidence available through bounded
-commands an agent can invoke.
+该模式比监控更广泛：从与操作相同的真相来源派生可观测性，并通过 agent 可以调用的有界命令使证据可用。
 
-## Match proof to the changed surface
+## 将证明匹配到变更的表面
 
-The local verification interface is grouped by risk and artifact type. It
-includes formatting across all retained languages, general linting, workflow
-security analysis, infrastructure validation, generated-configuration checks,
-race-enabled Go tests, and the Markdown coverage ratchet. Narrow targets support
-iteration; the full relevant targets are required before delivery.
+本地验证接口按风险和 artifact 类型分组。它包括所有保留语言的格式化、通用 lint、工作流安全分析、基础设施验证、生成的配置检查、启用 race 的 Go 测试和 Markdown 覆盖率棘轮。窄目标支持迭代；在交付之前需要完整的相关目标。
 
-CI mirrors those surfaces with pinned toolchains and immutable actions. It
-builds and race-tests Go, verifies generated monitoring inputs, checks
-infrastructure projects independently, audits Go and Node dependencies, and
-formats or lints Python, shell, YAML, Terraform, workflows, and text. Cross-file
-policy tests verify that CI consumes canonical versions rather than becoming a
-second version manifest.
+CI 使用固定的工具链和不可变的 action 镜像这些表面。它构建和 race 测试 Go、验证生成的监控输入、独立检查基础设施项目、审计 Go 和 Node 依赖，并格式化或 lint Python、shell、YAML、Terraform、工作流和文本。跨文件策略测试验证 CI 消费规范版本，而不是成为第二个版本 manifest。
 
-The proof strategy is deliberately plural:
+证明策略是刻意多元的：
 
-- parser and value constructors get table tests;
-- policy packages get positive and negative fixtures plus live-repository
-  checks;
-- generated configuration gets freshness or equivalence checks;
-- domain selection and target construction are tested before final rendering;
-- remote operations use recording transports to prove side effects and their
-  absence;
-- visible documentation rendering uses golden output and the full corpus; and
-- high-risk operations retain human approval, canary evidence, logs, access
-  checks, and rollback state.
+- 解析器和值构造器获得表驱动测试；
+- 策略包获得正面和负面 fixture 加上活动仓库检查；
+- 生成的配置获得新鲜度或等价检查；
+- 领域选择和目标构建在最终渲染之前进行测试；
+- 远程操作使用录制传输来证明副作用及其缺失；
+- 可见文档渲染使用黄金输出和完整语料库；以及
+- 高风险操作保留人类审批、canary 证据、日志、访问检查和回滚状态。
 
-Map every green check to the claim it establishes.
+将每个绿色勾号映射到它建立的声明。
 
-## How the harness evolved
+## Harness 如何演进
 
-The repository history records an iterative rollout driven by operating needs.
-Scheduled maintenance first acquired versioned contracts and stable feedback
-markers. The risky device operation was then split into build, isolated canary,
-backup, promotion, verification, and recovery phases. Repeated dependency work
-produced canonical manifest parsers, capability classifications, cooldown
-policy, and immutable-selector checks. A dependency-removal project produced the
-owned Markdown boundaries, upstream vectors, corpus tests, and a coverage
-ratchet. Domain refactors then produced typed remote targets, repository-rooted
-capabilities, the raw/resolved/executable command pipeline, and lints that
-prevent regression.
+仓库历史记录了一个由运营需求驱动的迭代推出。调度维护首先获得了版本化 contract 和稳定的反馈标记。然后将有风险的设备操作拆分为构建、隔离 canary、备份、推广、验证和恢复阶段。反复的依赖工作产生了规范 manifest 解析器、capability 分类、冷却策略和不可变选择器检查。一个依赖移除项目产生了拥有的 Markdown 边界、上游向量、语料库测试和覆盖率棘轮。领域重构然后产生了类型化远程目标、仓库根植的 capability、raw/resolved/executable 命令管道，以及防止回归的 lint。
 
-The rules came from observed operating and review needs. Once a lesson proved
-durable, it moved from a patch comment into a document, domain API, test, or
-lint. The implementation sequence records how operating feedback became durable
-repository structure.
+这些规则来自观察到的运营和审查需求。一旦一个教训被证明是持久的，它就从补丁注释移入文档、领域 API、测试或 lint。实现序列记录了运营反馈如何变成持久的仓库结构。
 
-## Maintenance and supply-chain outcomes
+## 维护和供应链结果
 
-The approach produces several practical benefits:
+该方法产生了几个实际好处：
 
-- version bumps touch canonical manifests and tool-owned lockfiles instead of a
-  web of duplicated test literals;
-- commands inherit consistent repository roots, cancellation, parsing, and
-  default-resolution behavior;
-- agents receive actionable local diagnostics instead of relying on reviewer
-  memory;
-- scheduled roles can do useful asynchronous work without inheriting deployment
-  authority;
-- narrow owned code replaces broad dependencies only when confidence can be
-  rebuilt locally; and
-- failure recovery is designed into high-risk operations before cutover.
+- 版本更改触及规范 manifest 和工具拥有的 lockfile，而不是复制的测试字面量网络；
+- 命令继承一致的仓库根、取消、解析和默认值解析行为；
+- agent 收到可操作的本地诊断，而不是依赖审查者的记忆；
+- 调度角色可以在不继承部署权限的情况下进行有用的异步工作；
+- 窄拥有的代码仅在本地可以重建信心时才替换宽泛依赖；以及
+- 故障恢复在切换之前就被设计到高风险操作中。
 
-It also has costs and limits:
+它也有成本和限制：
 
-- repository parsers and custom lints are production code and require tests;
-- 100 percent statement coverage does not prove standards compatibility;
-- a multi-ecosystem infrastructure repository still has a meaningful supply
-  chain even when each direct dependency is justified;
-- upstream release inspection and network-backed freshness checks can be
-  ambiguous or unavailable;
-- documentation can drift unless freshness is continuously compared with
-  machine-readable source; and
-- canary isolation reduces deployment risk but cannot make a physical device as
-  reproducible as a disposable test environment.
+- 仓库解析器和自定义 lint 是生产代码，需要测试；
+- 100% 的语句覆盖率不能证明标准兼容性；
+- 即使每个直接依赖都是合理的，多生态系统基础设施仓库仍然具有有意义的供应链；
+- 上游发布检查和网络支持的新鲜度检查可能不明确或不可用；
+- 除非持续与机器可读的源进行新鲜度比较，否则文档可能漂移；以及
+- canary 隔离降低了部署风险，但无法使物理设备像一次性测试环境那样可复现。
 
-The dependency model treats owned code as a liability, automation stops on
-ambiguity, and the high-risk runbook preserves a human gate.
+依赖模型将拥有的代码视为负债，自动化在模糊性处停止，高风险运行手册保留人类关卡。
 
-## What to transfer
+## 可迁移的单元
 
-The reusable unit is a set of relationships:
+可复用的单元是一组关系：
 
-1. **Route context:** keep the root guide navigational and put reasoning next to
-   the domain that consumes it.
-2. **Separate data from policy:** read current versions and inventory from
-   canonical manifests; encode only durable relationships and risk rules in
-   policy code.
-3. **Model the operation:** parse external syntax once, resolve defaults with
-   explicit knowledge, and pass typed values to the domain.
-4. **Constrain capabilities:** make process execution, filesystem scope, remote
-   transport, credentials, and deployment authority explicit dependencies.
-5. **Teach with guardrails:** every local lint should name the violated
-   invariant and the preferred repair.
-6. **Replace confidence with confidence:** when deleting a dependency, add the
-   fixtures, adversarial cases, corpus tests, and enforcement that cover the
-   newly owned responsibility.
-7. **Make risk a state machine:** separate assessment, build, canary, approval,
-   backup, cutover, verification, and recovery when an operation can destroy its
-   own control plane.
-8. **Close the loop:** convert repeated human feedback, failed runs, and
-   operational surprises into the earliest durable document, API, test, or lint.
+1. **路由上下文：** 保持根指南的导航性，将推理放在消费它的领域旁边。
+2. **分离数据与策略：** 从规范 manifest 读取当前版本和 inventory；仅在策略代码中编码持久关系和风险规则。
+3. **建模操作：** 将外部语法解析一次，用显式知识解析默认值，并将类型化值传递给领域。
+4. **约束 capability：** 使进程执行、文件系统范围、远程传输、凭证和部署权限成为显式依赖。
+5. **用防护栏教学：** 每个本地 lint 都应该命名被违反的不变量和首选修复。
+6. **用信心替换信心：** 当删除依赖时，添加覆盖新拥有责任的 fixture、对抗性案例、语料库测试和强制执行。
+7. **将风险建模为 state machine：** 当操作可能破坏其自身的控制平面时，分离评估、构建、canary、批准、备份、切换、验证和恢复。
+8. **关闭循环：** 将反复的人类反馈、失败的运行和运营意外转化为最早的持久文档、API、测试或 lint。

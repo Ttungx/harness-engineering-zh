@@ -1,65 +1,32 @@
-# Synthesis Guide
+# 综合指南
 
-Documents under `docs/` are organized by thesis. A folder `README.md` develops
-the argument; supporting files develop cases, applications, caveats, or
-evaluation.
+`docs/` 下的文档按论纲组织。文件夹 `README.md` 展开论述；支持文件展开案例、应用、注意事项或评估。
 
-## Document ownership
+## 文档所有权
 
-[`ARCHITECTURE.md`](../ARCHITECTURE.md) owns the document and routing boundaries
-for the root, agent guide, thesis index, playbooks, evaluation method, and
-sources. Follow that ownership map and link to an owner instead of recreating
-its section in another front door.
+[`ARCHITECTURE.md`](../ARCHITECTURE.md) 拥有文档和路由边界的权威，涵盖根目录、agent 指南、论纲索引、playbook、评估方法和来源。遵循该所有权地图，链接到所有者而不是在另一个入口重新创建其章节。
 
-## Writing
+## 写作
 
-- Open with the claim. Do not justify why the document exists.
-- Before landing a substantive public-facing synthesis change, obtain separate
-  adversarial reviews for claim integrity and external-reader signal-to-noise.
-- Write for an external audience. Remove research status, source counts,
-  visibility classifications, attribution deliberation, and editorial dialogue.
-- Prefer concrete nouns and verbs over labels such as “framework,” “pattern,” or
-  “lineage” when the relationship can be stated directly.
-- Use named reference links with human-readable text such as
-  `artichoke/artichoke:ARCHITECTURE.md` or `artichoke/artichoke@fbb43b6`. Put
-  each `[name]: URL` definition immediately after the paragraph or list that
-  uses it. Do not use inline link destinations in prose.
-- When a long article or transcript supports a specific claim, add a Chrome Text
-  Fragment (`#:~:text=`) that selects a short, distinctive excerpt. Keep
-  bibliographic and whole-work links canonical, and omit a fragment when the
-  target does not expose stable matching text.
-- Let sources shape the argument. Cite long-form work for developed arguments
-  and public posts for the precise claims or examples they contribute. Weave
-  each source into the paragraph it supports; do not end a thesis or section
-  with a bag of loosely related links. Leave unused evidence in the source index
-  instead of attaching it after the synthesis.
-- State the positive claim directly. Avoid manufacturing emphasis with “not X,
-  but Y,” “the point is not,” “rather than,” and similar contrastive templates.
-  Use negation only when the excluded alternative is materially necessary to the
-  argument.
-- Use Mermaid for diagrams. Do not use ASCII art.
-- Do not repeat a thesis at length in a supporting note. Link to its owner and
-  develop only what is new.
+- 以主张开头。不要为文档为何存在而辩护。
+- 在发布实质性公开综合变更之前，分别获取针对主张完整性和外部读者信噪比的对抗性审查。
+- 面向外部受众写作。移除研究状态、来源数量、可见性分类、归属审议和编辑对话。
+- 当关系可以被直接陈述时，优先使用具体名词和动词，而不是"framework"、"pattern"或"lineage"等标签。
+- 使用带名称的引用链接，配合人类可读的文本，如 `artichoke/artichoke:ARCHITECTURE.md` 或 `artichoke/artichoke@fbb43b6`。将每个 `[name]: URL` 定义放在使用它的段落或列表之后。不要在散文中使用内联链接目标。
+- 当长篇文章或转录稿支持特定主张时，添加一个 Chrome Text Fragment (`#:~:text=`) 选择一个简短、独特的摘录。保持书目和整体作品链接的规范性，当目标不暴露稳定的匹配文本时省略片段。
+- 让来源塑造论述。引用长篇作品来支持展开的论述，引用公开帖子来支持它们贡献的精确主张或示例。将每个来源编织进它支持的段落中；不要以一堆松散相关的链接来结束论纲或章节。将未使用的证据留在来源索引中，而不是附加在综合之后。
+- 直接陈述正面主张。避免使用"不是 X，而是 Y"、"重点不在于"、"而不是"以及类似的对比模板来制造强调。仅在被排除的替代方案对论述具有实质性必要时才使用否定。
+- 使用 Mermaid 绘制图表。不要使用 ASCII art。
+- 不要在支持性注释中详细重复论纲。链接到其所有者，只展开新的内容。
 
-## Claims
+## 主张
 
-- Distinguish Ryan’s individual writing, work by his team, other implementation
-  evidence, earlier influences, and later alternate framings through accurate
-  prose—not reader-facing classification labels.
-- The OpenAI harness-engineering essay was published on 2026-02-11. Böckeler’s
-  Fowler-site article appeared on 2026-04-02 and is not prior art for it.
-- Harness engineering holds a chosen model and coding agent fixed as a black box
-  while changing context, tools, and environment. “Fixed” is an evaluation and
-  deployment boundary, not permanent allegiance to a lab product.
-- Polytoken’s reuse of Codex `apply_patch` semantics and capability-preserving
-  ACP interoperability are aligned examples. Least-common-denominator flattening
-  is the caveat.
-- MLD is telemetry for the harness builder, not raw context automatically fed to
-  future agents.
+- 通过准确的散文区分 Ryan 的个人写作、其团队的工作、其他实施证据、更早的影响和较晚的替代框架——而不是面向读者的分类标签。
+- OpenAI harness-engineering 论文发表于 2026-02-11。Böckeler 发表在 Fowler 网站上的文章出现于 2026-04-02，不是它的现有技术。
+- Harness engineering 将选定的模型和 coding agent 固定为黑盒，同时改变 context、工具和环境。"固定"是评估和部署边界，而不是对实验室产品的永久忠诚。
+- Polytoken 对 Codex `apply_patch` 语义的重用和保持能力的 ACP 互操作性是对齐的示例。最小公分母扁平化是需要注意的地方。
+- MLD 是 harness 构建者的遥测数据，而不是自动馈送给未来 agent 的原始 context。
 
-## Cases
+## 案例
 
-Sanitize private implementation evidence into substantive design and tradeoff
-analysis. Do not mention authorization mechanics, private paths, hostnames,
-credentials, or inaccessible links. State what the system does, why the design
-matters, what proof exists, and which maintenance or residual risk remains.
+将私有实施证据净化为实质性的设计和权衡分析。不要提及授权机制、私有路径、主机名、凭证或不可访问的链接。说明系统做了什么、为什么设计重要、存在什么验证，以及哪些维护或残留风险仍然存在。

@@ -2,9 +2,6 @@
 
 # Claude Code
 
-- Preserve the distinction between an editorial procedure and observed
-  evidence when applying or summarizing a playbook.
-- Use subagents for bounded evidence gathering and independent review. Keep the
-  main thread responsible for target authority, material adaptations, decisive
-  source reading, verification, and the final claim boundary.
-- Treat auto memory and session recollection as leads, not validation.
+- 在应用或总结 playbook 时，保持编辑过程与观察到的证据之间的区分。
+- 使用 subagent 进行有界的证据收集和独立审查。保持主线程负责目标权威、实质性改编、决定性源阅读、验证和最终声明边界。
+- 将自动记忆和 session 回忆视为线索，而非验证。

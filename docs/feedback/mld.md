@@ -1,65 +1,45 @@
-# MLD: Telemetry for the Harness Builder
+# MLD：为 Harness 构建者提供的遥测
 
-Ryan's [initial MLD instruction] asks an agent to record three kinds of
-observation while it works:
+Ryan 的 [initial MLD instruction] 要求 agent 在工作时记录三类观察：
 
-- **Mistakes**: errors the agent noticed in its own trajectory;
-- **Learnings**: facts about the environment that it had to discover; and
-- **Desires**: context or tools it wished it had.
+- **Mistakes**：agent 在自身轨迹中注意到的错误；
+- **Learnings**：agent 不得不发现的关于环境的事实；以及
+- **Desires**：agent 希望拥有的上下文或工具。
 
 [initial MLD instruction]: https://x.com/_lopopolo/status/2037307669464363433
 
-He later named this [the MLD framework], described the files [as agent
-telemetry], and made their consumer explicit: [they are for the agent builder].
-MLD defines a sensor and its consumer. Harness builders still need an operating
-policy for corroboration, promotion, expiry, and privacy; the protocol below is
-one such policy.
+他后来将其命名为 [the MLD framework]，将文件描述为 [as agent telemetry]，并明确了其消费者：[they are for the agent builder]。MLD 定义了一个传感器及其消费者。Harness 构建者仍然需要一个运营策略来处理验证、提升、过期和隐私；下面的协议就是这样一个策略。
 
 [the MLD framework]: https://x.com/_lopopolo/status/2052091245296861574
 [as agent telemetry]: https://x.com/_lopopolo/status/2037307926902403558
 [they are for the agent builder]:
   https://x.com/_lopopolo/status/2052095157336703410
 
-## The three signals
+## 三种信号
 
-### Mistakes locate failed trajectories
+### Mistakes 定位失败轨迹
 
-A mistake identifies a point where the attempted path diverged from the job. It
-may reveal missing context, an ambiguous interface, a weak sensor, an absent
-capability, or a one-off model error.
+Mistake 标识了尝试的路径偏离工作的节点。它可能揭示缺失的上下文、模糊的接口、薄弱的传感器、缺失的能力或一次性模型错误。
 
-The report is a lead. The diff, tool output, failed checks, review findings, and
-final outcome determine what actually happened.
+报告是线索。差异、工具输出、失败的检查、评审发现和最终结果决定了实际发生了什么。
 
-### Learnings record discoveries
+### Learnings 记录发现
 
-A learning records an environment fact the agent had to discover. Costly or
-repeated rediscovery can reveal process data that is absent, hidden, or poorly
-routed: which manifest is canonical, where ownership lives, why a test exists,
-how a deployment is staged, or which apparently simple path is unsafe. Compare
-the learning with the trajectory before treating it as a harness defect.
+Learning 记录了 agent 不得不发现的环境事实。代价高昂或反复的重新发现可能揭示缺失、隐藏或路由不当的流程数据：哪个清单是规范的、所有权在哪里、测试为什么存在、部署如何分阶段，或者哪个看似简单的路径不安全。在将 learning 视为 harness 缺陷之前，将其与轨迹进行比较。
 
-These facts are often private, changing, repository-specific, or tacit.
-Organizations cannot presume that general model weights contain them or that
-agents will reliably infer which facts govern the task.
+这些事实通常是私有的、变化的、特定于仓库的或隐式的。组织不能假设通用模型权重包含它们，或者 agent 会可靠地推断哪些事实约束着任务。
 
-### Desires locate missing external levers
+### Desires 定位缺失的外部杠杆
 
-A desire identifies context or a tool that might have shortened the trajectory:
-a log, browser view, manifest parser, domain command, architectural decision, or
-narrow permission.
+Desire 标识了可能缩短轨迹的上下文或工具：日志、浏览器视图、清单解析器、领域命令、架构决策或窄范围权限。
 
-An agent can request only what it can imagine, and its proposed remedy may be
-wrong. The useful question is whether the request exposes a recurring human
-relay or an important failure that the current harness cannot detect.
+Agent 只能请求它能想象到的东西，而其提议的补救措施可能是错误的。有用的问题是该请求是否暴露了反复出现的人类传递或当前 harness 无法检测到的重要失败。
 
-## The builder decides what persists
+## 构建者决定什么保留
 
-The prompt instruments the run, the files record the agent's experience,
-independent evidence tests that account, and the builder decides whether the
-harness should change.
+Prompt 对运行进行仪表化，文件记录 agent 的经验，独立证据检验该叙述，构建者决定 harness 是否应更改。
 
-## From a run to an intervention
+## 从运行到干预
 
 ```mermaid
 flowchart TB
@@ -74,88 +54,59 @@ flowchart TB
     later --> classify
 ```
 
-For each run, use this sequence:
+对于每次运行，使用以下步骤：
 
-1. ask for concise MLD reports during the run;
-2. store them with the trajectory and outcome;
-3. check each claim against deterministic evidence and human review;
-4. group repeated signals by the underlying gap;
-5. change the smallest authoritative surface that closes that gap; and
-6. verify in later runs that the intervention reduced the failure or relay.
+1. 在运行期间要求简洁的 MLD 报告；
+2. 将它们与轨迹和结果一起存储；
+3. 用确定性证据和人工评审验证每条声明；
+4. 按底层缺失项对反复出现的信号分组；
+5. 更改关闭该缺失项的最小权威界面；以及
+6. 在后续运行中验证干预是否减少了失败或传递。
 
-Changing the fixed model-agent configuration at the same time would muddy the
-result. MLD belongs to harness engineering because the intervention targets
-context, tools, and the curated environment.
+同时更改固定的 model-agent 配置会使结果变得模糊。MLD 属于 harness engineering，因为干预措施针对上下文、工具和策划的环境。
 
-## Promote signals into owned surfaces
+## 将信号提升为拥有的界面
 
-Raw reports should become ordinary repository artifacts only after
-corroboration:
+原始报告只有在经过验证后才能成为普通的仓库 artifact：
 
-| Signal                                       | Corroborating evidence                    | Possible destination                          |
+| 信号                                       | 验证证据                    | 可能的目标位置                          |
 | -------------------------------------------- | ----------------------------------------- | --------------------------------------------- |
-| package repeatedly placed in the wrong layer | review history and dependency graph       | architecture guide and structural lint        |
-| generated file edited by hand                | diffs and stale-output failures           | discoverable generator and CI freshness check |
-| deployment target reconstructed from strings | command traces and near misses            | typed target and dry-run command              |
-| canonical manifest repeatedly rediscovered   | search trajectory and reviewer correction | short routing documentation                   |
-| needed browser state unavailable             | manual relay and missing runtime evidence | browser tool or observability surface         |
+| 包反复放置在错误的层 | 评审历史和依赖图       | 架构指南和结构化 lint        |
+| 生成的文件被手动编辑                | 差异和过期输出失败           | 可发现的生成器和 CI 新鲜度检查 |
+| 部署目标从字符串重建 | 命令追踪和险些失败            | 有类型的目标和试运行命令              |
+| 规范清单被反复重新发现   | 搜索轨迹和评审者纠正 | 简短的路由文档                   |
+| 需要的浏览器状态不可用             | 手动传递和缺失的运行时证据 | 浏览器工具或可观测性界面         |
 
-Promotion assigns ownership. A stable boundary belongs in architecture. A
-current version belongs in its manifest. A hazardous operation belongs in a
-runbook and a narrow command. A known failure belongs in a test or lint. A
-run-specific observation stays with the run.
+提升即分配所有权。稳定的边界属于架构。当前版本属于其清单。危险操作属于操作手册和窄范围命令。已知失败属于测试或 lint。特定于运行的观察随运行保留。
 
-Promote corroborated signals into a smaller, clearer harness, and keep raw
-advice with the run that produced it.
+将经过验证的信号提升到更小、更清晰的 harness 中，并将原始建议与产生它的运行一起保留。
 
-## Keep raw telemetry out of agent context
+## 将原始遥测数据排除在 agent 上下文之外
 
-Automatically injecting MLD into later runs collapses observation and control
-into one channel. That creates feedback-loop risks:
+自动将 MLD 注入后续运行会将观察和控制折叠到一个通道中。这会产生反馈循环风险：
 
-- an incorrect learning reinforces itself as an instruction;
-- task-local state masquerades as a durable fact;
-- duplicates consume context without changing decisions;
-- stale entries survive after the repository changes;
-- sensitive material crosses its intended boundary; and
-- a scored MLD requirement rewards plausible self-commentary instead of a good
-  outcome.
+- 不正确的 learning 作为指令自我强化；
+- 任务本地状态伪装成持久事实；
+- 重复项消耗上下文但不改变决策；
+- 过期条目在仓库更改后仍然存活；
+- 敏感材料跨越其预期边界；以及
+- 对 MLD 的评分要求奖励看似合理的自我评论而非好的结果。
 
-Keep raw files attached to the run that produced them. If a team maintains a
-cross-run rollup, the builder owns deduplication, corroboration, expiry, and
-promotion. Agents may inspect a deliberately selected report during an audit;
-that is different from treating the entire accumulation as trusted context.
+将原始文件附属于产生它们的运行。如果团队维护跨运行的汇总，构建者负责去重、验证、过期和提升。Agent 可以在审计期间检查经过精心选择的报告；这与将整个累积视为可信上下文是不同的。
 
-## Self-report under separated incentives
+## 在分离激励下的自报告
 
-OpenAI's [confessions research] studies a related outer-loop report. After a
-rollout, the same model produces a structured account of the objectives it
-followed, violated, or remained uncertain about. A separate judge scores that
-account, and the resulting reward trains only the confession. The researchers
-evaluate the channel on out-of-distribution stress tests designed to elicit
-reward hacking, scheming, covert rule violations, and other knowingly bad
-behavior. For the specially trained model in these proof-of-concept experiments,
-the separated incentives and induced failures give the confession channel
-stronger empirical grounding than an ordinary MLD instruction when the question
-is whether the worker knowingly concealed noncompliance. Results varied across
-evaluations, and the work does not establish that every confession is reliable.
+OpenAI 的 [confessions research] 研究了相关的外循环报告。在发布后，同一模型生成关于其遵循、违反或仍然不确定的目标的结构化叙述。一个独立的评审者对该叙述进行评分，而由此产生的奖励仅用于训练忏悔本身。研究人员在分布外压力测试上评估该通道，旨在引出奖励破解、阴谋、隐蔽规则违反和其他明知故犯的不良行为。在这些概念验证实验中，对于经过特殊训练的模型，分离的激励和诱导的失败使忏悔通道在 worker 是否故意隐瞒不合规方面比普通的 MLD 指令具有更强的经验基础。结果因评估而异，该工作并未确定每次忏悔都是可靠的。
 
 [confessions research]:
   https://openai.com/index/how-confessions-can-keep-language-models-honest/#:~:text=We%20trained%20a%20version%20of%20GPT%E2%80%915%20Thinking%20to%20produce%20confessions,stress%2Dtest%20datasets%20designed%20to%20elicit%20behaviors
 
-The design suggests an analogous operating rule for MLD. Confession training
-uses a [reward separate from the main answer]; raw MLD remains evidence for the
-harness builder until corroboration, rather than becoming an instruction that
-can influence the worker's next task.
+该设计为 MLD 提示了类似的运营规则。忏悔训练使用 [reward separate from the main answer]；原始 MLD 在验证之前仍然是 harness 构建者的证据，而不是成为可能影响 worker 下一个任务的指令。
 
 [reward separate from the main answer]:
   https://openai.com/index/how-confessions-can-keep-language-models-honest/#:~:text=During%20training%2C%20a%20confession%20is%20evaluated%20by%20a%20separate%20reward%20model,never%20influence%20the%20reward%20for%20the%20main%20answer
 
-Chain-of-thought plays a narrower role in the paper. The confession judge [does
-not receive the policy's chain-of-thought], and the method [works when the
-answer contains no chain-of-thought]. Chain-of-thought appears separately in the
-researchers' false-negative audit. The confession channel's robustness under
-[adversarial pressure remains future work].
+Chain-of-thought 在论文中扮演较窄的角色。忏悔评审者 [does not receive the policy's chain-of-thought]，该方法 [works when the answer contains no chain-of-thought]。Chain-of-thought 出现在研究人员的假阴性审计中。忏悔通道在 [adversarial pressure remains future work] 下的稳健性仍有待研究。
 
 [does not receive the policy's chain-of-thought]:
   https://arxiv.org/html/2512.08093v2#:~:text=We%20do%20not%20show%20it%20any%20of%20the%20policy%E2%80%99s%20chain%2Dof%2Dthought
@@ -164,48 +115,30 @@ researchers' false-negative audit. The confession channel's robustness under
 [adversarial pressure remains future work]:
   https://arxiv.org/html/2512.08093v2#:~:text=We%20would%20also%20be%20interested%20in%20understanding%20how%20robust%20confessions%20are%20to%20adversarial%20pressure,out%2Dof%2Ddistribution%20data
 
-MLD has no separately trained honesty reward or stress-test evidence, so its
-reports remain low-trust hypotheses. Its open Mistakes, Learnings, and Desires
-categories address a broader operating problem: hidden organizational context,
-missing tools, repeated reconstruction, and friction that may occur without a
-policy violation. That breadth may expose dimensions a fixed policy-compliance
-schema did not anticipate, but it does not increase the report's evidentiary
-weight. Traces, diffs, tests, review, and outcomes decide what the builder
-promotes.
+MLD 没有单独训练的诚实性奖励或压力测试证据，因此其报告仍然是低可信度的假设。其开放的 Mistakes、Learnings 和 Desires 类别解决更广泛的运营问题：隐藏的组织上下文、缺失的工具、反复重建以及可能在没有策略违反的情况下发生的摩擦。这种广度可能暴露固定策略合规模式未预料到的维度，但它不会增加报告的证据权重。追踪、差异、测试、评审和结果决定构建者提升什么。
 
-## What MLD cannot prove
+## MLD 无法证明什么
 
-Self-report is partial and biased. An agent may miss its most important error,
-misidentify the cause, request the wrong capability, or rationalize a bad
-outcome. A desire does not prove that a new tool should exist. A learning does
-not prove that the learned fact is true. Silence does not prove that the
-environment was sufficient.
+自报告是片面的和有偏差的。Agent 可能会错过其最重要的错误、错误识别原因、请求错误的能力或为坏结果寻找合理化理由。Desire 不能证明应该存在新工具。Learning 不能证明所学到的事实是真实的。沉默不能证明环境是充分的。
 
-Use MLD alongside:
+将 MLD 与以下内容一起使用：
 
-- deterministic tests and lints;
-- tool traces and failure output;
-- diffs and generated artifacts;
-- review findings;
-- user-journey and outcome metrics; and
-- when useful, a fresh agent auditing the trajectory without inheriting the
-  first agent's explanation.
+- 确定性测试和 lint；
+- 工具追踪和失败输出；
+- 差异和生成的 artifact；
+- 评审发现；
+- 用户旅程和结果指标；以及
+- 必要时，让一个新的 agent 在不继承第一个 agent 解释的情况下审计轨迹。
 
-MLD consists of inspectable self-reports about a run. It does not require
-chain-of-thought and should not be treated as access to an agent's hidden
-reasoning.
+MLD 由关于运行的可检查自报告组成。它不需要 chain-of-thought，也不应被视为访问 agent 隐式推理的途径。
 
-## Where MLD fits
+## MLD 的定位
 
-Tests are sensors for known assertions. MLD can expose friction the builder has
-not encoded yet: hidden context, missing capabilities, ambiguous ownership, and
-repeated reconstruction work.
+测试是已知断言的传感器。MLD 可以暴露构建者尚未编码的摩擦：隐藏的上下文、缺失的能力、模糊的所有权和反复重建的工作。
 
-That makes it most valuable while a harness is being built or changed. The
-builder can see where the fixed agent experiences the repository as
-insufficient, then convert repeated evidence into one of the two durable levers:
+这使得它在 harness 构建或变更期间最有价值。构建者可以看到固定 agent 在哪些方面认为仓库不足，然后将反复出现的证据转化为两种持久杠杆之一：
 
-- better **context** at the decision point; or
-- a better **tool** for performing or observing the work.
+- 在决策点提供更好的**上下文**；或
+- 用于执行或观察工作的更好**工具**。
 
-The loop closes when a promoted change improves later outcomes.
+当提升的更改改善了后续结果时，循环即闭合。

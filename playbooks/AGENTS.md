@@ -1,28 +1,18 @@
-# Playbook Guide
+# Playbook 指南
 
-Playbooks are repository-authored applications of the anthology. They are not
-primary sources or verbatim accounts of Ryan Lopopolo's practice.
+Playbook 是仓库编写的选集应用。它们不是一手资料或 Ryan Lopopolo 实践的逐字记录。
 
-## Using a playbook
+## 使用 playbook
 
-- Read the target's instructions and current state first. Its contracts,
-  authority, and proof govern the work.
-- Treat the procedure as a scaffold that can be adapted or rejected. Record
-  material omissions or changes and the target evidence that required them.
-- Keep observations, interpretation, intervention hypotheses, and verified
-  outcomes distinct.
-- Do not treat inspection authority as permission to mutate a target.
+- 首先阅读目标的 instructions 和当前状态。其合约、authority 和 proof 支配工作。
+- 将过程视为可适应或可拒绝的脚手架。记录实质性的遗漏或变更以及需要它们的目标证据。
+- 保持观察、解释、干预假设和验证结果的区分。
+- 不要将检查权限视为修改目标的许可。
 
-## Editing a playbook
+## 编辑 playbook
 
-- Follow [`docs/AGENTS.md`](../docs/AGENTS.md) for public prose, claims,
-  citations, and adversarial review.
-- Attribute a procedure, taxonomy, template, or threshold to Ryan only when a
-  direct source establishes it.
-- Do not call a procedure validated, field-tested, proven, or canonical because
-  it passed editorial review, link checks, or one successful run.
-- Keep procedures here, developed arguments in [`docs/`](../docs/), comparative
-  method in [`evals/`](../evals/), and primary evidence in
-  [`sources/`](../sources/).
-- Update [`README.md`](README.md) when a playbook's purpose or evidence status
-  changes.
+- 遵循 [`docs/AGENTS.md`](../docs/AGENTS.md) 进行公共散文、声明、引用和对抗性审查。
+- 只有在直接来源确立时，才将过程、分类法、模板或阈值归于 Ryan。
+- 不要因为过程通过了编辑审查、链接检查或一次成功运行就称其为经过验证的、经过实地测试的、经过证明的或规范的。
+- 将过程保存在此处，将论证过的论点保存在 [`docs/`](../docs/) 中，将比较方法保存在 [`evals/`](../evals/) 中，将一手证据保存在 [`sources/`](../sources/) 中。
+- 当 playbook 的目的或证据状态发生变化时更新 [`README.md`](README.md)。

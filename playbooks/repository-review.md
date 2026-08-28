@@ -1,265 +1,174 @@
 # Repository Review Playbook
 
-See [About the playbooks] for this procedure's origin and current status.
+参见 [About the playbooks] 了解此过程的起源和当前状态。
 
-Review a repository by asking whether a capable coding agent can recover the
-real job, make a coherent change, prove the outcome, and operate safely without
-using a person as a relay. Representative whole journeys supply evidence for
-the jobs claimed.
+通过询问一个有能力的 coding agent 能否恢复真实工作、做出连贯变更、证明结果并在不将人作为中继的情况下安全操作来审查仓库。有代表性的完整旅程为声明的工作提供证据。
 
-This playbook is a broad diagnostic. Use [Improve One Harnessed Job] to close a
-single authorized intervention loop and [Evaluate the Harness] when making a
-comparative or longitudinal claim. Authorized inspection permits only the reads
-within its scope; it does not itself authorize broader access, egress, or
-changes to the target.
+此 playbook 是一个广泛的诊断。使用 [Improve One Harnessed Job] 关闭单个授权干预循环，使用 [Evaluate the Harness] 进行比较或纵向声明。授权检查仅允许其范围内的读取；它本身不授权更广泛的访问、出口或对目标的更改。
 
 [Improve One Harnessed Job]: improve-harness.md
 [Evaluate the Harness]: ../evals/
 [About the playbooks]: README.md
 
-Hold the chosen model-and-coding-agent configuration constant during the review.
-Assess the context, tools, repository structure, execution environment,
-permissions, and feedback loops around that worker. Follow representative
-journeys to determine whether the selected worker can complete the job through
-those surfaces.
+在审查期间保持选定的 model-and-coding-agent 配置不变。评估该 worker 周围的 context、tool、仓库结构、执行环境、权限和反馈循环。跟随有代表性的旅程，确定选定的 worker 能否通过这些 surface 完成工作。
 
-## Start with the outcome
+## 从结果开始
 
-The review should answer:
+审查应回答：
 
-- Which complete jobs can the agent perform today?
-- Where does it need hidden human knowledge, tool relay, or authority?
-- Which checks establish the claimed behavior, and which merely establish
-  internal consistency?
-- Where has defensive machinery accumulated around a missing domain model?
-- Which dependency and release decisions carry unowned risk?
-- What is the smallest change that would improve the next many trajectories?
+- agent 今天能完成哪些完整工作？
+- 它在哪里需要隐藏的人工知识、tool 中继或 authority？
+- 哪些检查建立了声明的行为，哪些仅建立内部一致性？
+- 哪些防御性机制围绕缺失的 domain 模型积累？
+- 哪些依赖和发布决策携带未拥有的风险？
+- 什么是最小的变更，可以改善接下来的多个轨迹？
 
-Keep these answers discrete. A repository with many controls can be harder to
-maintain and less safe than one with a few well-owned boundaries. A single
-release, credential, compatibility, or data-loss defect can dominate an
-otherwise strong system.
+保持这些答案的独立性。拥有许多控制的仓库可能比拥有少数良好拥有的边界的仓库更难维护且更不安全。单个发布、凭据、兼容性或数据丢失缺陷可能主导原本强大的系统。
 
-## Define the review contract
+## 定义审查合约
 
-Record the target revision and relevant external state, the fixed model and
-coding-agent configuration, the jobs being claimed, their accepted outcomes,
-the proof required at each boundary, the review's authority and access, and its
-known exclusions. Name the stop conditions for consequential operations.
+记录目标修订和相关外部状态、固定的模型和 coding-agent 配置、声明的工作、其被接受的结果、每个边界所需的 proof、审查的 authority 和访问权限，以及其已知排除项。命名重要操作的停止条件。
 
-The review may diagnose a missing owner or propose a change outside its mutation
-authority. Keep that finding explicit rather than treating inspection access as
-permission to implement it.
+审查可能诊断缺失的所有者或在其变更权限之外提出更改。保持该发现明确，而非将检查访问视为实施它的许可。
 
-## Inspect the work as a trajectory
+## 将工作作为轨迹检查
 
-Choose representative tasks and follow them from request to outcome:
+选择有代表性的任务并从请求到结果跟随它们：
 
-1. How does the agent classify the task?
-2. Which root guidance routes it to the relevant domain context?
-3. Can it find the existing owner of the concept it needs to change?
-4. Can it reproduce and observe the behavior without a human intermediary?
-5. Does the implementation preserve one domain model and one source of truth?
-6. Does the proof exercise the claim at the right boundary?
-7. Can the agent handle review, CI, conflicts, and delivery?
-8. Does it know which operation requires human judgment or new authority?
-9. Does the result leave a durable improvement for the next run?
+1. agent 如何分类任务？
+2. 哪些根指导将其路由到相关的 domain context？
+3. 它能否找到需要更改的概念的现有所有者？
+4. 它能否在没有人工中介的情况下重现和观察行为？
+5. 实现是否保持一个 domain 模型和一个事实来源？
+6. proof 是否在正确的边界行使声明？
+7. agent 能否处理审查、CI、冲突和交付？
+8. 它是否知道哪些操作需要人工判断或新权限？
+9. 结果是否为下一次运行留下持久的改进？
 
-Static inspection is necessary but insufficient. Run at least one real journey
-through the configured worker when the review claims end-to-end operability.
-[Give One Agent the Whole Job] develops ownership of decomposition, execution,
-integration, proof, review, delivery, and lifecycle closure.
+静态检查是必要的但不充分的。当审查声称端到端可操作时，通过配置的 worker 运行至少一次真实旅程。[Give One Agent the Whole Job] 阐述了分解、执行、集成、proof、审查、交付和生命周期关闭的所有权。
 
 [Give One Agent the Whole Job]: ../docs/whole-job/
 
-## Recover evidence from prior collaborations
+## 从先前的协作中恢复证据
 
-Review locally available session logs from work the user and agent performed
-together. They preserve evidence that a repository snapshot cannot: which
-requests required repeated steering, which formulations the user rejected, what
-the agent misunderstood, where a person acted as a tool, which proof changed the
-user's confidence, and which lessons never reached a durable owner.
+审查用户和 agent 一起工作的本地可用 session 日志。它们保留了仓库快照无法保留的证据：哪些请求需要反复引导、用户拒绝了哪些表述、agent 误解了什么、人工在哪里充当了工具、哪些 proof 改变了用户的信心，以及哪些经验从未到达持久的所有者。
 
-Treat those logs as trajectory evidence rather than repository policy. Connect
-each observation to the resulting diff, review, test, deployment, or user
-outcome before drawing a conclusion. Look for recurring corrections and for
-cases where the repository still permits a failure the user already taught an
-agent to avoid. A durable repair moves the lesson into the smallest owner that
-can shape future work: a type, API, test, lint, runbook, architecture rule,
-example, or routing document.
+将这些日志视为轨迹证据而非仓库策略。在得出结论之前，将每个观察与产生的 diff、审查、测试、部署或用户结果联系起来。寻找重复的修正和仓库仍然允许用户已经教 agent 避免的失败的情况。持久的修复将经验移入能够塑造未来工作的最小所有者：type、API、test、lint、runbook、架构规则、示例或路由文档。
 
-Local logs may contain private source material, credentials, personal data,
-unpublished decisions, or context intended only for one collaboration. Read only
-logs within the review's authority. Keep raw logs in their existing storage,
-record any access limitation, and publish only the bounded synthesis and
-evidence the destination audience is allowed to receive. Do not embed the
-session corpus in the reviewed repository.
+本地日志可能包含私有源材料、凭据、个人数据、未发布的决策或仅用于一次协作的 context。仅阅读审查权限内的日志。将原始日志保存在其现有存储中，记录任何访问限制，并仅发布目标受众允许接收的有界综合和证据。不要将会话语料库嵌入被审查的仓库中。
 
-## Review the ownership boundaries
+## 审查所有权边界
 
-### Context and routing
+### Context 和路由
 
-Look for a short root map that says what the repository is, why its
-compatibility surfaces matter, which operating loop applies, and where each task
-class should retrieve deeper guidance. Check that important knowledge is
-versioned beside the work rather than trapped in chat, private memory, or one
-automation instance. Test the retrieval hierarchy described in [Route Context
-Just in Time]: can the agent find the relevant architecture, dependency posture,
-generation contract, or runbook without preloading the whole corpus?
+寻找一个简短的根映射，说明仓库是什么、其兼容性 surface 为什么重要、适用哪个操作循环，以及每个任务类应在哪里检索更深层的指导。检查重要知识是否与工作一起版本控制，而非被困在聊天、私有记忆或一个自动化实例中。测试 [Route Context Just in Time] 中描述的检索层次结构：agent 能否在不预加载整个语料库的情况下找到相关的架构、依赖态势、生成合约或 runbook？
 
 [Route Context Just in Time]: ../docs/just-in-time-context/
 
-### Capabilities and tools
+### 能力和 tool
 
-Follow each required capability through discovery, selection, invocation,
-interpretation, repair, and real-system verification. A tool that exists but is
-hard to find or whose response does not guide the next action leaves the person
-as a relay. Check whether the agent can recover from malformed inputs, partial
-results, timeouts, and unavailable operations without guessing at hidden state.
+跟随每个所需能力经过发现、选择、调用、解释、修复和真实系统验证。存在但难以找到的 tool 或其响应不指导下一步操作的 tool 会将人保留为中继。检查 agent 能否从格式错误的输入、部分结果、超时和不可用操作中恢复，而不猜测隐藏状态。
 
-[Make Capabilities Legible and Operable] develops this complete tool loop.
+[Make Capabilities Legible and Operable] 阐述了这个完整的 tool 循环。
 
 [Make Capabilities Legible and Operable]: ../docs/tool-legibility/
 
-### Domain and architecture
+### Domain 和架构
 
-Use the canonical ownership and typed boundaries in [Make the Repository Teach
-the Agent] to trace concepts that appear in several layers: versions, workflow
-manifests, identifiers, generated records, UI states, release artifacts, and
-dependency policy. Each should have one authoritative representation and an
-obvious owner.
+使用 [Make the Repository Teach the Agent] 中的规范所有权和类型化边界来追踪出现在多个层次中的概念：版本、工作流清单、标识符、生成记录、UI 状态、发布 artifact 和依赖策略。每个都应有一个权威表示和一个清晰的所有者。
 
 [Make the Repository Teach the Agent]: ../docs/domain-modeling/
 
-Treat these as warning signs:
+将这些视为警告信号：
 
-- competing semantic owners for one language or concept;
-- one fact copied across manifests, policy, fixtures, and tests;
-- fixtures coupled to incidental representation instead of domain conditions;
-- untrusted values flowing beyond the boundary that decodes them;
-- state transitions represented by overlapping defensive checks; and
-- adapters that reimplement domain behavior instead of exposing its owner.
+- 一个语言或概念的竞争性语义所有者；
+- 一个事实复制到清单、策略、fixture 和测试中；
+- fixture 耦合到附带表示而非 domain 条件；
+- 不受信任的值流超出解码它们的边界；
+- 状态转换由重叠的防御性检查表示；以及
+- 适配器重新实现 domain 行为而非暴露其所有者。
 
-Repeated defensive checks can look rigorous while making the system less
-coherent. Ask what type, boundary, state machine, or source of truth would make
-the invalid condition unrepresentable.
+重复的防御性检查看起来严谨，同时使系统不那么连贯。询问哪种 type、边界、状态机或事实来源会使无效条件不可表示。
 
-### Execution and proof
+### 执行和 proof
 
-Apply the claim-matched evidence in [Prove the Outcome in the Real Environment].
-Verify that the agent can launch and inspect the real system. Depending on the
-claim, useful evidence may include browser state, logs, metrics, traces,
-screenshots, generated-corpus diffs, fuzz results, compatibility vectors, canary
-health, or rollback verification.
+应用 [Prove the Outcome in the Real Environment] 中匹配声明的证据。验证 agent 能否启动和检查真实系统。根据声明，有用的证据可能包括浏览器状态、日志、指标、跟踪、截图、生成语料库 diff、fuzz 结果、兼容性向量、金丝雀健康或回滚验证。
 
 [Prove the Outcome in the Real Environment]: ../docs/proof/
 
-Map each green test to its assertion, then collect separate evidence at the user
-boundary. Distinguish:
+将每个绿色测试映射到其断言，然后在用户边界收集单独的证据。区分：
 
-- generated freshness from source-to-output parity;
-- unit behavior from a working browser journey;
-- an uploaded artifact from a healthy deployment;
-- coverage percentage from standards compatibility;
-- a vulnerability-shaped pattern from a proven impact; and
-- policy self-consistency from policy being sourced correctly.
+- 生成的新鲜性与源到输出对等；
+- 单元行为与可用的浏览器旅程；
+- 上传的 artifact 与健康的部署；
+- 覆盖率百分比与标准兼容性；
+- 漏洞形状模式与已证明的影响；以及
+- 策略自我一致性与策略正确来源。
 
-### Feedback and guardrails
+### Feedback 和护栏
 
-Use [Turn Feedback Into Infrastructure] to inspect whether review comments,
-failed trajectories, incidents, and build failures improve the environment.
-Stable lessons may become domain types, preferred APIs, lints, tests, runbooks,
-or routing docs. The control should explain the violated principle and point
-toward repair.
+使用 [Turn Feedback Into Infrastructure] 检查审查评论、失败轨迹、事件和构建失败是否改善了环境。稳定的经验可能成为 domain type、首选 API、lint、test、runbook 或路由文档。控制应解释被违反的原则并指向修复。
 
 [Turn Feedback Into Infrastructure]: ../docs/feedback/
 
-Evaluate enforcement by the failure class it prevents and the carrying cost it
-adds. Look for duplicated validation, rules that encode taste before it
-stabilizes, reviewers without a convergence policy, and prose that repeats
-executable truth. Remove a control when a better upstream model makes it
-redundant.
+通过它预防的失败类别和它增加的承载成本来评估强制执行。寻找重复的验证、在品味稳定前编码品味的规则、没有收敛策略的审查者，以及重复可执行真相的散文。当更好的上游模型使其冗余时移除控制。
 
-### Dependencies and supply chain
+### 依赖和供应链
 
-Review dependencies as the capability and lifetime-ownership decisions developed
-in [Own Dependency Risk]. For each material dependency or repo-owned
-replacement, ask:
+按照 [Own Dependency Risk] 中阐述的能力和生命周期所有权决策审查依赖。对于每个重要依赖或仓库拥有的替代品，询问：
 
 [Own Dependency Risk]: ../docs/durable-systems/dependency-ownership.md
 
-- What capability does it provide?
-- Why is this source trusted?
-- What transitive and update risk does it add?
-- If it was removed, which compatibility and security obligations moved into the
-  repository?
-- What corpus, fuzzing, conformance, provenance, and maintenance plan rebuild
-  confidence?
+- 它提供什么能力？
+- 为什么信任此来源？
+- 它添加了哪些传递性和更新风险？
+- 如果被移除，哪些兼容性和安全义务移入仓库？
+- 什么语料库、fuzz、合规性、出处和维护计划重建信心？
 
-Evaluate each dependency against the target repository's documented trust
-posture.
+根据目标仓库文档化的信任态势评估每个依赖。
 
-### Delivery and authority
+### 交付和 authority
 
-Follow the exact artifact from validation to release. Prefer deploying the
-immutable artifact CI proved rather than rebuilding it in a more privileged job.
-Inspect workflow permissions, credential persistence, third-party action pins,
-network execution, canary boundaries, approval gates, rollback, and post-deploy
-checks.
+从验证到发布跟随确切的 artifact。优先部署 CI 已证明的不可变 artifact，而非在更特权的作业中重建它。检查工作流权限、凭据持久性、第三方 action 固定、网络执行、金丝雀边界、批准门控、回滚和部署后检查。
 
-Use [Maximize Autonomy Inside Explicit Authority] to separate capability from
-authority. An agent may prepare a consequential operation completely while a
-person retains approval for cutover. Secrets the worker does not need should not
-enter its readable environment.
+使用 [Maximize Autonomy Inside Explicit Authority] 将能力与 authority 分开。agent 可以完全准备重要操作，而人工保留对切换的批准。worker 不需要的 secret 不应进入其可读环境。
 
 [Maximize Autonomy Inside Explicit Authority]: ../docs/authority/
 
-### Proportionality
+### 比例性
 
-Use [Optimize for Measured Effectiveness] to account for each harness
-component's carrying cost. Ask which observed failure or risk it addresses,
-whether another control already owns that invariant, how long the normal loop
-takes, and who will maintain the component. Prefer the smallest system that
-covers the repository’s actual failure modes.
+使用 [Optimize for Measured Effectiveness] 计算每个 harness 组件的承载成本。询问它解决的观察到的失败或风险、另一个控制是否已拥有该不变量、正常循环需要多长时间，以及谁将维护该组件。优先选择覆盖仓库实际失败模式的最小系统。
 
 [Optimize for Measured Effectiveness]: ../docs/effectiveness/
 
-## Findings
+## 发现
 
-Lead with actionable findings ordered by consequence. Each finding should name:
+以按后果排序的可操作发现开头。每个发现应命名：
 
-- the behavior or invariant at risk;
-- concrete evidence and the owning boundary;
-- why existing proof did not catch it;
-- the root correction at the owning boundary; and
-- any redundant machinery that should be removed after the correction.
+- 风险中的行为或不变量；
+- 具体证据和所有者边界；
+- 为什么现有 proof 没有发现它；
+- 在所有者边界的根本修正；以及
+- 修正后应移除的任何冗余机制。
 
-Then record strong foundations worth preserving, the journeys actually run, and
-known limits of the review.
+然后记录值得保留的强大基础、实际运行的旅程和审查的已知限制。
 
-## After the review
+## 审查之后
 
-When the task scope and target authority contract authorize changes, choose one
-consequence-ordered finding and enter [Improve One Harnessed Job]. Preserve its
-baseline evidence, expected behavioral effect, smallest owning intervention,
-proof plan, carrying cost, and fresh-rerun criterion. Without mutation
-authority, deliver the findings and stop at the proposed intervention.
+当任务范围和目标权威合约授权更改时，选择一个按后果排序的发现并进入 [Improve One Harnessed Job]。保留其基线证据、预期行为效果、最小的所有者干预、proof 计划、承载成本和新重新运行标准。没有变更权限时，交付发现并在建议的干预处停止。
 
-A successful repair to one journey establishes an operational result under the
-observed conditions. Route claims of general effect to [Evaluate the Harness].
+对一次旅程的成功修复在观察条件下建立操作结果。将一般效果的声明路由到 [Evaluate the Harness]。
 
-## Readiness blockers
+## 就绪阻塞项
 
-Treat the repository as not ready for the claimed job when evidence shows:
+当证据显示以下情况时，将仓库视为尚未准备好承担声明的工作：
 
-- silent data loss or semantic migration regression;
-- a release path that can bypass the validated artifact;
-- credentials or untrusted execution with material unintended authority;
-- a consequential operation without an appropriate gate or recovery path;
-- an owned compatibility or security surface without a credible confidence
-  model;
-- documentation that materially overstates enforced guarantees; or
-- no way to prove the user-visible or operational outcome being claimed.
+- 静默数据丢失或语义迁移回归；
+- 可以绕过已验证 artifact 的发布路径；
+- 具有实质意外权限的凭据或不受信任的执行；
+- 没有适当门控或恢复路径的重要操作；
+- 没有可信信心模型的拥有兼容性或安全 surface；
+- 文档实质上夸大了强制保证；或者
+- 无法证明被声明的用户可见或操作结果。
 
-Scale the harness to the claim. Each blocker requires narrowing the claim or
-building the missing boundary.
+将 harness 扩展到声明的规模。每个阻塞项需要缩小声明或构建缺失的边界。

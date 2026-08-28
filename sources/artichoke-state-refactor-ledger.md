@@ -1,19 +1,14 @@
-# Artichoke State Refactor Evidence Ledger
+# Artichoke State Refactor 证据账本
 
-The cross-reference timeline for [Destructure State (#442)] contains exactly 50
-causally linked pull requests that merged before [the second integration attempt
-(#661)] opened. Their descriptions or comments identify them as extracted from,
-inspired by, related to, or required for #442.
+[Destructure State (#442)] 的交叉引用时间线恰好包含 50 个因果关联的 pull request，它们都在 [第二次集成尝试 (#661)] 开始之前合并。这些 PR 的描述或评论将其标识为从 #442 提取、受其启发、与其相关或为 #442 所必需。
 
-The headings group pull requests by the date they opened or first
-cross-referenced #442. A merge may have completed later. Ryan Lopopolo authored
-all 50.
+标题按照 PR 打开或首次交叉引用 #442 的日期分组。合并可能在之后完成。全部 50 个 PR 均由 Ryan Lopopolo 创建。
 
 [Destructure State (#442)]: https://github.com/artichoke/artichoke/pull/442
 [the second integration attempt (#661)]:
   https://github.com/artichoke/artichoke/pull/661
 
-## January 24–26
+## 1月24日–26日
 
 - [converter syntax (#444)], [converter inference (#447)], [non-null class and
   module lookup (#448)], [exception-handler safety (#449)], [implicit integer
@@ -58,7 +53,7 @@ all 50.
 [boot conversion cleanup (#466)]:
   https://github.com/artichoke/artichoke/pull/466
 
-## January 27–February 23
+## 1月27日–2月23日
 
 - [parser state and APIs (#467)], [PRNG state (#469)], [protected FFI calls
   (#470)], [warnings on stderr (#471)], and [byte-preserving warnings (#472)];
@@ -87,7 +82,7 @@ all 50.
   https://github.com/artichoke/artichoke/pull/526
 [output state (#539)]: https://github.com/artichoke/artichoke/pull/539
 
-## March 4–May 3
+## 3月4日–5月3日
 
 - [Regexp global preparation (#557)], [global-variable capabilities (#562)],
   [UTF-8 Regexp migration (#566)], [Onig Regexp migration (#571)], and [Regexp

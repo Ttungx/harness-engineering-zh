@@ -1,4 +1,4 @@
-# hyperbo.la source snapshots
+# hyperbo.la source 快照
 
 These files are byte-for-byte snapshots of Ryan Lopopolo's [hyperbo.la] blog
 sources, retrieved from the [blog repository]. The source manifest records each
